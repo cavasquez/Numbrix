@@ -1,0 +1,29 @@
+This numbrix project currently allows one to play a game of Numbrix. In order to start a game, the player
+must go to File -> New Game. This will allow the player to choose a file from which to load the game.
+The file formatting is as follows:
+
+# of rows (or columns)
+x_1 y_1 value_1
+x_2 y_2	value_2
+.
+.
+.
+x_i y_i value_i 
+
+where i is an arbitrary number no greater than # of rows * # of columns. I understand that the formatting
+had the "origin" of the gridstart at the bottom left corner, but since we are allowed to format the text 
+file as wanted, the "origin" is the top left corner.
+
+After filling in the grid, click on the "Finish" button. Doing so will produce a message in the bottom pane
+informing the player on correctness of grid or errors encountered. Once done, the bottom pane will inform
+the player the process needed to start a new game (file -> new game or file -> reset).
+
+The pane to the right will let the player know their game history (inputs and modifications).
+
+To input a value, simply click on the cell you wish to modify and type in the number you wish
+to place into the cell. To delete a value, simply click on the cell you wish to remove a value from
+and hit backspace until there is no value left.
+
+Two sample girds are provided in example1.txt and example2.txt
+example1.txt contains the grid from the project specification
+example2.txt contains the sample grid from the discussion
