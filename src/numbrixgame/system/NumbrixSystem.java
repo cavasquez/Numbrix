@@ -63,6 +63,16 @@ public class NumbrixSystem
 		
 		// Add the leftbar
 		numbrix.gui().addLeftDisplay(player);
+		
+		// If player is computer, solve
+		if(player == Player.COMPUTER)
+		{
+			// Solve
+			Solver solver = new Solver(this);
+			solver.solve();
+			// Set button to view solution step by step
+			
+		} /* end if */
 	} /* end setup method */
 	
 	public void reset()
