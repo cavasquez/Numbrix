@@ -32,12 +32,12 @@ public class Snake
 				if(grid[j][i] != null) queue.add(new Triple(grid[j][i], j, i));
 			} /* end for j */
 		} /* end for i */
-		
 		// Construct snake
 		Triple currentTriple = queue.remove();
 		int currentList = 0;
+		int size = queue.size();
 		snake.get(currentList).add(currentTriple);
-		for(int i = 0; i < queue.size(); i++)
+		for(int i = 0; i < size; i++)
 		{
 			if(queue.peek().getValue() == (currentTriple.getValue() + 1))
 			{/* Still encountering consecutive values, add to current list */
@@ -55,6 +55,7 @@ public class Snake
 		
 	} /* end constructor */
 	
+	/*-------------------------------------- Data Structure Manipulation --------------------------------------*/
 	/**
 	 * Add new value and positions
 	 */
@@ -141,55 +142,134 @@ public class Snake
 	
 	/**
 	 * Remove the given value.
-	 * @return	returns whether or not the value of the triple was found and removed
+	 * @param value	the value of the triple being removed
+	 * @return		the triple that was removed
 	 */
-	public boolean remove(Triple triple)
+	public Triple remove(int value)
 	{
 		int currentList = 0;
 		LinkedList<Triple> list = null;
 		boolean found = false;
+		Triple returner = null;
 		
 		while( (currentList < this.snake.size()) && !found)
 		{
 			list = this.snake.get(currentList);
 			// Check to see if triple is bounded on top by any of the lists
-			if(list.getFirst().getValue() == triple.getValue())
+			if(list.getFirst().getValue() == value)
 			{/* Triple is head of list. Remove it */
-				list.removeFirst();
+				returner = list.removeFirst();
 				
 				// Check to see if list is empty. If so, remove it
 				if(list.size() == 0) this.snake.remove(currentList);
 				found = true;
 			} /* end if */
-			else if(list.getLast().getValue() == triple.getValue())
+			else if(list.getLast().getValue() == value)
 			{/* Triple is tail of list. Remove it */
-				list.removeLast();
+				returner = list.removeLast();
 				
 				// Check to see if list is empty. If so, remove it
 				if(list.size() == 0) this.snake.remove(currentList);
 				found = true;
 			} /* end else if */
-			else if( (list.getFirst().getValue() < triple.getValue()) && 
-					(list.getLast().getValue() < triple.getValue()) )
+			else if( (list.getFirst().getValue() < value) && 
+					(list.getLast().getValue() > value) )
 			{/* Triple is within list. */
 				// Calculate position of triple
-				int position = triple.getValue() - list.getFirst().getValue();
+				int position = value - list.getFirst().getValue();
 				int last = list.size();
 				
 				// Remove triple and partition lists
-				list.remove(position);
+				returner = list.remove(position);
 				this.snake.add(currentList + 1, new LinkedList<Triple>());
 				for(int i = position; i < (last - 1); i++)
 				{
-					this.snake.get(currentList + 1).add(list.remove(i));
+					this.snake.get(currentList + 1).add(list.remove(position));
 				} /* end for loop */
 			} /* end else if */
 			else currentList++;
 			
 		} /* end while */
 		
-		return found;
+		return returner;
 	} /* end remove method */
+	
+	/*-------------------------------------- Data Structure Meta Data --------------------------------------*/
+	/**
+	 * Returns the triple with the given value
+	 * @param value	the value of the triple being searched for
+	 * @return		the triple with the given value
+	 */
+	public Triple find(int value)
+	{
+		int currentList = 0;
+		LinkedList<Triple> list = null;
+		boolean found = false;
+		Triple returner = null;
+		
+		while( (currentList < this.snake.size()) && !found)
+		{
+			list = this.snake.get(currentList);
+			// Check to see if triple is bounded on top by any of the lists
+			if(list.getFirst().getValue() == value)
+			{/* Triple is head of list. Remove it */
+				returner = list.getFirst();
+				found = true;
+			} /* end if */
+			else if(list.getLast().getValue() == value)
+			{/* Triple is tail of list. */
+				returner = list.getLast();
+				found = true;
+			} /* end else if */
+			else if( (list.getFirst().getValue() < value) && 
+					(list.getLast().getValue() > value) )
+			{/* Triple is within list. */
+				// Calculate position of triple
+				int position = value - list.getFirst().getValue();
+				
+				// Find the triple in the list
+				returner = list.get(position);
+			} /* end else if */
+			else currentList++;
+			
+		} /* end while */
+		
+		return returner;
+	} /* end find method */
+	
+	/**
+	 * Returns the number of lists in the snake
+	 * @return	the number of lists in the snake
+	 */
+	public int size()
+	{
+		return this.snake.size();
+	} /* end size method */
+	
+	/**
+	 * Returns the size of the list at the position
+	 * @param position	the position of the list queried
+	 * @return			the size of the list at the position
+	 */
+	public int sizeOf(int position)
+	{
+		return this.snake.get(position).size();
+	} /* end sizeOf method */
+	
+	/**
+	 * Returns the number of Triples in the snake
+	 * @return
+	 */
+	public int count()
+	{
+		int returner = 0;
+		for(int i = 0; i < this.snake.size(); i ++)
+		{
+			returner += this.snake.get(i).size();
+		} /* end for loop */
+		
+		return returner;
+	} /* end count method */
 	
 	@Override
 	public String toString()
