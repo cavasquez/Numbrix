@@ -38,13 +38,12 @@ public class ConstraintTest extends SearchTest
 		numbrix.system.printGrid();
 		print(this.solver.snakeString());
 		
-		constraintFound = this.constraint.startSearch(true);
-		print("Constraint found?: " + constraintFound);
-		
-		numbrix.system.printGrid();
-		print(this.solver.snakeString());
-		
-		
+//		constraintFound = this.constraint.startSearch(true);
+//		print("Constraint found?: " + constraintFound);
+//		
+//		numbrix.system.printGrid();
+//		print(this.solver.snakeString());
+
 	} /* end startTest method */
 
 } /* end HeuristicTest class */

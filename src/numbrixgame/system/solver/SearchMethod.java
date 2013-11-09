@@ -26,7 +26,7 @@ public abstract class SearchMethod
 			this.position = position;
 		} /* end constructor */
 		
-	} /* end Player enum */
+	} /* end Direction enum */
 	
 	/************************************ Class Attributes *************************************/
 	protected static NumbrixSystem system;

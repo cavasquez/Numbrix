@@ -1,7 +1,9 @@
 package numbrixgame.system.solver;
 
 import java.util.LinkedList;
+import java.util.Set;
 import java.util.Stack;
+import java.util.TreeSet;
 
 /**
  * The constraint search to be used by the Solver.
@@ -83,16 +85,33 @@ public class ConstraintSearch extends SearchMethod
 				} /* end for loop */
 				
 				/* If there is only one direction in which a node has potential, it must be that the
-				 * node is the only node that can have the searched for value */
+				 * node is the only node that can have the searched for value. That is to say, if there
+				 * is only one node that can connect this node and the sought after value, it must be
+				 * the case that the node is the node that can hold the value we are looking for. */
 				if(moves.size() == 1)
 				{
 					constraintFound = true;
 					this.constraintFound(moves.peek(), current, increment);
 				} /* end if */
-				
-				/* If there are multiple nodes with potential, we can still constrain the nodes.
-				 * The node in which the only value that can be placed in the node is the sought
-				 * for value must be the node in which the value can be placed. */
+				else
+				{
+					/* If there are multiple nodes with potential, we can still constrain the nodes.
+					 * The node in which the only value that can be placed in the node is the sought
+					 * for value must be the node in which the value can be placed. */
+					size = moves.size();
+					
+					for(int i = 0; i < size; i++)
+					{
+						if(thirdDegreeSearch(current, dir = moves.pop(), increment)) moves.add(dir);
+					} /* end for loop */
+					
+					if(moves.size() == 1)
+					{
+						constraintFound = true;
+						this.constraintFound(moves.peek(), current, increment);
+					} /* end if */
+					
+				} /* end else */
 				
 			} /* end else if */
 			
@@ -137,18 +156,15 @@ public class ConstraintSearch extends SearchMethod
 		LinkedList<Direction> moves = this.makeDirectionStack(direction);
 		Direction currentDirection = null;
 		
-		/* First, check to see if preliminary moves pass the first degree search. There must be three directions in preliminaryMoves */
+		/* First, check to see if preliminary moves pass the first degree search. There must be three directions in preliminaryMoves.
+		 * Essentially, we are looking for populated legal nodes. */
 		if(firstPrimeDegreeSearch(current, currentDirection = moves.pop())) moves.add(currentDirection);
 		if(firstPrimeDegreeSearch(current, currentDirection = moves.pop())) moves.add(currentDirection);
 		if(firstPrimeDegreeSearch(current, currentDirection = moves.pop())) moves.add(currentDirection);
 
-		/* Now the moves list contains only directions to nodes that are populated.
-		 * These nodes will help us determine if the current node still has the potential 
-		 * to hold the necessary value */
-		
-		/* If the ends match with the increment value
-		 * of the current triple, then the current examined empty node has the potential to be the
-		 * incremented node of the previous triple. */
+		/* Now the moves list contains only directions to nodes that are populated. This constraint will
+		 * now look for a  node that can connect to the previous node. Should such a node exist, 
+		 * then it must be the case that this node has the potential to hold the sought after value. */
 		int currentVal;
 		while(!moves.isEmpty())
 		{
@@ -184,21 +200,66 @@ public class ConstraintSearch extends SearchMethod
 		if(legal(current.getX() + currentDirection.x, current.getY() + currentDirection.y)) moves.add(currentDirection);
 
 		/* Now the moves list contains only directions to nodes that are legal. 
-		 * Now we should check to see if the surrounding nodes are end nodes in 
-		 * the snake. If all the nodes are end nodes, then only this value may fit 
-		 * in the node*/
+		 * Now we should check to see if the surrounding nodes are full. If there
+		 * are any empty nodes, we cannot apply further constraints. */
 		int size = moves.size();
-		int nextVal = 0;
 		for(int i = 0; i < size; i++)
 		{
-			currentDirection = moves.pop();
-			nextVal = SearchMethod.system.getVal(current.getX() + currentDirection.x, current.getY() + currentDirection.y);
-			if(SearchMethod.snake.isEnd(nextVal)) moves.add(currentDirection);
+			if(firstPrimeDegreeSearch(current, currentDirection = moves.pop())) moves.add(currentDirection);
 		} /* end for loop */
 		
-		/* If only one of the directions is an end node, then it must be the case
-		 * that the node */
-		if(moves.size() == 1) potential = true;
+		if(moves.size() == size)
+		{
+			/* It is the case that we have an equal number of legal nodes and full nodes.
+			 * Now check to see if there are any "linking" nodes. This constrain works on 
+			 * the premise that there will only be one pair of "linking", amongst which
+			 * one of the nodes is the previous node. If there are more than one "linking"
+			 * node pairs, then this constraint fails. */
+			Integer[] ends = null;
+ 			boolean firstIntersectionFound = false;
+			boolean lostPotential = false;
+			int currentVal;
+			Set<Integer> bag = new TreeSet<Integer>();
+			
+			/* We must remember to look for the previous node as well, even though
+			 * we know that it will have a match in the increment direction. It may 
+			 * be the case that it also has a match in the opposite of the increment
+			 * direction which would kill this constraint. */
+			ends = SearchMethod.snake.findEnds(previous.getValue());
+			if(ends[0] != null) bag.add(ends[0]);
+			if(ends[1] != null) bag.add(ends[1]);
+			
+			/* Find the ends of the remaining nodes */
+			while( !moves.isEmpty() && !lostPotential )
+			{
+				currentDirection = moves.pop();
+				currentVal = SearchMethod.system.getVal(current.getX() + currentDirection.x, current.getY() + currentDirection.y);
+				ends = SearchMethod.snake.findEnds(currentVal);
+				
+				if(ends[0] != null)
+				{
+					if(bag.contains(ends[0]))
+					{
+						if(firstIntersectionFound) lostPotential = true;
+						else firstIntersectionFound = true;
+					} /* end if */
+					else bag.add(ends[0]);
+				} /* end if */
+				if(ends[1] != null)
+				{
+					if(bag.contains(ends[1]))
+					{
+						if(firstIntersectionFound) lostPotential = true;
+						else firstIntersectionFound = true;
+					} /* end if */
+					else bag.add(ends[1]);
+				} /* end if */
+				
+			} /* end while loop */
+			
+			if(!lostPotential) potential = true;
+			
+		} /* end if */
 		
 		return potential;
 	} /* end secondDegreeSerch method */

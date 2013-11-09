@@ -14,6 +14,23 @@ import java.util.PriorityQueue;
 
 public class Snake 
 {
+	/************************************ Class Constants *************************************/
+	public static enum End
+	{
+		HEAD(0, 1),
+		TAIL(1, -1);
+		
+		protected final int position;
+		protected final int increment;
+		
+		End(int position, int increment)
+		{
+			this.position = position;
+			this.increment = increment;
+		} /* end constructor */
+		
+	} /* end End enum */
+	
 	/************************************ Class Attributes *************************************/
 	private LinkedList<LinkedList<Triple>> snake;
 	
@@ -315,6 +332,48 @@ public class Snake
 		return isEnd;
 	} /* end isEnd method */
 	
+	/**
+	 * Returns the missing ends (if any) of the provided value
+	 * @param value	the value for which the ends are being searched for
+	 * @return		the ends of the provided value
+	 */
+	public Integer[] findEnds(int value)
+	{
+		Integer[] ends = new Integer[2];
+		
+		boolean isEnd = false;
+		int list = 0;
+		while(!isEnd && (value >= snake.get(list).getFirst().getValue()) && (list < snake.size()) )
+		{
+			if(snake.get(list).getFirst().getValue() == value && 
+					snake.get(list).getLast().getValue() == value) 
+			{
+				/* It is the case that both ends of this value are empty */
+				ends[End.HEAD.position] = value - End.HEAD.increment;
+				ends[End.TAIL.position] = value + End.TAIL.increment;
+				isEnd = true;
+				
+			} /* end if */
+			else if(snake.get(list).getFirst().getValue() == value) 
+			{
+				/* It is the case that only the tail is empty */
+				ends[End.TAIL.position] = value + End.TAIL.increment;
+				isEnd = true;
+				
+			} /* end else if */
+			else
+			{
+				/* It is the case that only the head is empty */
+				ends[End.HEAD.position] = value - End.HEAD.increment;
+				isEnd = true;
+				
+			} /* end else */
+			list++;
+		} /* end while loop */
+		
+		return ends;
+	} /* end fomdEnds method*/
+ 	
 	/**
 	 * Returns the first Triple in the list
 	 * @param list	the list being searched
