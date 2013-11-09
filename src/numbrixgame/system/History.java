@@ -90,4 +90,9 @@ public class History
 		return changes;
 	} /* end getLog method */
 	
+	public int getSize()
+	{
+		return this.historyLog.size();
+	} /* end getSize method */
+	
 } /* end History class */

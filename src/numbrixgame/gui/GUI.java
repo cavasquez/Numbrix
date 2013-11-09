@@ -16,7 +16,6 @@ public class GUI extends JFrame
 {
 	/************************************ Class Constants *************************************/
 	private static final long serialVersionUID = 7225797195421921688L;
-	private static final int PADDING = 10;
 	private static final String NAME = "Numbrix";
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 500;

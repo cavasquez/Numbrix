@@ -1,9 +1,8 @@
 package numbrixgame.system;
 
 import java.io.File;
-
 import numbrixgame.numbrix;
-import numbrixgame.gui.Table;
+import numbrixgame.system.solver.Solver;
 
 /*****************************************************************************************************
  * NumbrixSystem will take care of the back end for Numbrix.
@@ -32,12 +31,13 @@ public class NumbrixSystem
 	} /* end Player enum */
 	
 	/************************************ Class Attributes *************************************/
-	private int gridSize;				// The size of the grid
-	private boolean[][] staticData;		// a grid that tells us if a position has static(provided) data
-	private Integer[][] grid;			// a grid that holds the initial values in the grid
-	private Player player;				// Whos playing
-	private File file;					// Initial file
-	private History history;			// The history of the game
+	protected int gridSize;				// The size of the grid
+	protected boolean[][] staticData;		// a grid that tells us if a position has static(provided) data
+	protected Integer[][] grid;			// a grid that holds the initial values in the grid
+	protected Player player;				// Whos playing
+	protected File file;					// Initial file
+	protected History history;			// The history of the game
+	protected int numOfObjects;			// Total number of objects in the grid
 	
 	/************************************ Class Methods *************************************/
 	public NumbrixSystem() {/* Do nothing */}
@@ -54,6 +54,7 @@ public class NumbrixSystem
 		this.gridSize = parser.getGridSize();
 		this.staticData = parser.getStatic();
 		this.grid = parser.getGrid();
+		this.numOfObjects = gridSize * gridSize;
 		
 		// Create the history (this MUST happen before grid is made)
 		this.history = new History(gridSize, staticData);
@@ -87,6 +88,11 @@ public class NumbrixSystem
 		return validator.getState();
 	} /* end verify method */
 	
+	public Validator.State verify()
+	{
+		return this.verify(this.grid);
+	} /* end overloaded verify method */
+	
 	public Integer[][] makeGrid()
 	{// Return a grid of nulls that has the correct size
 		Integer[][] returner = new Integer[gridSize][];
@@ -103,30 +109,79 @@ public class NumbrixSystem
 		return returner;
 	} /* end makeGrid method */
 	
+	public void modifyGrid(int x, int y, Integer val)
+	{
+		this.grid[y][x] = val;
+		this.history.logChange(x, y, val);
+	} /* end modifyGrid method */
+	
+	/**
+	 * Log the change to the position
+	 * @param x			the x position
+	 * @param y			the y position
+	 * @param newVal	the new value of the position
+	 * @deprecated
+	 */
 	public void logChange(int x, int y, Integer newVal)
 	{
 		this.history.logChange(x, y, newVal);
 	} /* end logChange method */
 	
+	/**
+	 * Print the system to standard out
+	 */
+	public void printGrid()
+	{
+		String print = "";
+		Integer val;
+		
+		for(int y = gridSize - 1; y >= 0; y--)
+		{
+			for(int x = 0; x < this.gridSize; x++)
+			{
+				val = this.getVal(x, y);
+				if(val == null) print += "__, ";
+				else if((val/10) == 0) print += " " + Integer.toString(val) + ", ";
+				else print += Integer.toString(val) + ", ";
+			} /* end for loop */
+			print += "\n";
+			
+		} /* end i loop */
+		
+		System.out.println(print);
+	} /* end printGrid method */
+ 	
 	/*------------------ Getter methods ------------------*/
 	public int getGridSize()
 	{
-		return gridSize;
+		return this.gridSize;
 	} /* end getGridSize method */
 	
 	public Player getPlayer()
 	{
-		return player;
+		return this.player;
 	} /* end getPlayer method */
 	
 	public Integer[][] getGrid()
 	{
-		return grid;
+		return this.grid;
 	} /* end getGrid method */
+	
+	public Integer getVal(int x, int y)
+	{
+		Integer returner = null;
+		if( (x >= 0 && x < this.numOfObjects ) && (y >=0 && y < this.numOfObjects) ) returner = this.grid[y][x];
+		return returner;
+	} /* end getVal method */
 	
 	public String getHistory()
 	{
 		return this.history.getLog();
 	} /* end getHistory method */
+	
+	public int getNumOfObjects()
+	{
+		return this.numOfObjects;
+	} /* end getNumOfObjects */
 	
 } /* end NumbrixSystem class */

@@ -15,7 +15,6 @@ public class Table extends JTable
 {
 	/*************************** Class Constants ***************************/
 	private static final long serialVersionUID = -8095017388954201753L;
-	private static final int PADDING = 15;
 	
 	/*************************** Class Attributes ***************************/
 	private boolean[][] startData;		// The starting data (non modifiable data)

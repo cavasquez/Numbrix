@@ -13,10 +13,10 @@ import numbrixgame.system.NumbrixSystem;
 public class numbrix
 {
 	/*************************** Class Attributes ***************************/
-	private static NumbrixSystem system;
-	private static GUI gui;
+	protected static NumbrixSystem system;
+	protected static GUI gui;
 	
-	/*************************** Class Methods ***************************/
+	/*************************** Class Methods ***************************/	
 	/*------------------ Main method ------------------*/
 	public static void main(String[] args)
 	{
@@ -44,12 +44,12 @@ public class numbrix
 	} /* end gui method */
 	
 	/*------------------ Private methods ------------------*/
-	private static final void initializeUI()
+	protected static final void initializeUI()
 	{// Create the UI
 		numbrix.gui = new GUI();
 	} /* end initializeUI method */
 	
-	private static final void initializeSystem()
+	protected static final void initializeSystem()
 	{// Create the system
 		numbrix.system = new NumbrixSystem();
 	} /* end initializeSystem method */
