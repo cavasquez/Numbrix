@@ -25,6 +25,9 @@ public class ConstraintTest extends SearchTest
 		numbrix.system.printGrid();
 		print(this.solver.snakeString());
 		
+		//Integer[] a = this.constraint.snake.findEnds(55);
+		//print("55: " + a[0] + " " + a[1]);
+		
 		print("Actual test starts now");
 		boolean constraintFound = false;
 		Triple triple = null;

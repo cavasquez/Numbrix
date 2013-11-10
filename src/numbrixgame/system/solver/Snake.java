@@ -17,8 +17,8 @@ public class Snake
 	/************************************ Class Constants *************************************/
 	public static enum End
 	{
-		HEAD(0, 1),
-		TAIL(1, -1);
+		LAST(0, 1),
+		FIRST(1, -1);
 		
 		protected final int position;
 		protected final int increment;
@@ -345,29 +345,28 @@ public class Snake
 		int list = 0;
 		while(!isEnd && (value >= snake.get(list).getFirst().getValue()) && (list < snake.size()) )
 		{
-			if(snake.get(list).getFirst().getValue() == value && 
+			if(snake.get(list).getFirst().getValue() == value || 
 					snake.get(list).getLast().getValue() == value) 
 			{
-				/* It is the case that both ends of this value are empty */
-				ends[End.HEAD.position] = value - End.HEAD.increment;
-				ends[End.TAIL.position] = value + End.TAIL.increment;
 				isEnd = true;
-				
+				if(snake.get(list).getFirst().getValue() == value && 
+						snake.get(list).getLast().getValue() == value) 
+				{
+					/* It is the case that both ends of this value are empty */
+					ends[End.FIRST.position] = value + End.FIRST.increment;
+					ends[End.LAST.position] = value + End.LAST.increment;
+				} /* end if */
+				else if(snake.get(list).getFirst().getValue() == value) 
+				{
+					/* It is the case that only the first node is empty */
+					ends[End.FIRST.position] = value + End.FIRST.increment;
+				} /* end else if */
+				else
+				{
+					/* It is the case that only the last node is empty */
+					ends[End.LAST.position] = value + End.LAST.increment;
+				} /* end else */
 			} /* end if */
-			else if(snake.get(list).getFirst().getValue() == value) 
-			{
-				/* It is the case that only the tail is empty */
-				ends[End.TAIL.position] = value + End.TAIL.increment;
-				isEnd = true;
-				
-			} /* end else if */
-			else
-			{
-				/* It is the case that only the head is empty */
-				ends[End.HEAD.position] = value - End.HEAD.increment;
-				isEnd = true;
-				
-			} /* end else */
 			list++;
 		} /* end while loop */
 		

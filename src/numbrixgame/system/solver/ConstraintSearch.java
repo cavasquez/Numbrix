@@ -16,6 +16,7 @@ public class ConstraintSearch extends SearchMethod
 	/************************************ Class Attributes *************************************/
 	private Stack<Triple> additions;
 	private Solver solver;
+	private boolean print = false;
 	
 	/************************************ Class Methods *************************************/
 	public ConstraintSearch(Solver solver)
@@ -57,6 +58,8 @@ public class ConstraintSearch extends SearchMethod
 		boolean constraintFound = false;
 		
 		/* Check the terminal cases */
+		if(current.getValue() == 51) System.out.println("ConstraintSearch.search: 51 found, print: " + (print=true));
+		else print = false;
 		if(current.getValue() >= 0 && current.getValue() <= SearchMethod.system.getNumOfObjects())
 		{
 			LinkedList<Direction> moves = new LinkedList<Direction>(); // stack of valid moves
@@ -99,12 +102,14 @@ public class ConstraintSearch extends SearchMethod
 					 * The node in which the only value that can be placed in the node is the sought
 					 * for value must be the node in which the value can be placed. */
 					size = moves.size();
-					
+					if(print) System.out.println("ConstraintSearch.search: " + current.getValue() + " is at third with size " + size);
+					if(print) System.out.println("ConstraintSearch.search: " + moves.toString());
 					for(int i = 0; i < size; i++)
 					{
 						if(thirdDegreeSearch(current, dir = moves.pop(), increment)) moves.add(dir);
 					} /* end for loop */
-					
+					size = moves.size();
+					if(print) System.out.println("ConstraintSearch.search: " + current.getValue() + " third has moves=" + moves.size());
 					if(moves.size() == 1)
 					{
 						constraintFound = true;
@@ -199,6 +204,7 @@ public class ConstraintSearch extends SearchMethod
 		currentDirection = moves.pop();
 		if(legal(current.getX() + currentDirection.x, current.getY() + currentDirection.y)) moves.add(currentDirection);
 
+		if(print) System.out.println("ConstraintSearch.thirdDegreeSearch: prelim moves from " + direction + ": " + moves.toString());
 		/* Now the moves list contains only directions to nodes that are legal. 
 		 * Now we should check to see if the surrounding nodes are full. If there
 		 * are any empty nodes, we cannot apply further constraints. */
@@ -207,7 +213,7 @@ public class ConstraintSearch extends SearchMethod
 		{
 			if(firstPrimeDegreeSearch(current, currentDirection = moves.pop())) moves.add(currentDirection);
 		} /* end for loop */
-		
+		if(print) System.out.println("ConstraintSearch.thirdDegreeSearch: after primary search " + direction + ": " + moves.toString());
 		if(moves.size() == size)
 		{
 			/* It is the case that we have an equal number of legal nodes and full nodes.
@@ -225,9 +231,12 @@ public class ConstraintSearch extends SearchMethod
 			 * we know that it will have a match in the increment direction. It may 
 			 * be the case that it also has a match in the opposite of the increment
 			 * direction which would kill this constraint. */
+			if(print) System.out.println("ConstraintSearch.thirdDegreeSearch: at " + direction + "\n \n" + this.snake.toString());
 			ends = SearchMethod.snake.findEnds(previous.getValue());
 			if(ends[0] != null) bag.add(ends[0]);
 			if(ends[1] != null) bag.add(ends[1]);
+			
+			if(print) System.out.println("ConstraintSearch.thirdDegreeSearch: at " + direction + " currently in bag: " + ends[0] + " " + ends[1] + " for " + previous.getValue());
 			
 			/* Find the ends of the remaining nodes */
 			while( !moves.isEmpty() && !lostPotential )
@@ -235,24 +244,29 @@ public class ConstraintSearch extends SearchMethod
 				currentDirection = moves.pop();
 				currentVal = SearchMethod.system.getVal(current.getX() + currentDirection.x, current.getY() + currentDirection.y);
 				ends = SearchMethod.snake.findEnds(currentVal);
-				
+				if(print) System.out.println("ConstraintSearch.thirdDegreeSearch: at " + direction + ": " + currentDirection + " with 0=" + ends[0] + " 1=" + ends[1]);
 				if(ends[0] != null)
 				{
+					if(print) System.out.println("ConstraintSearch.thirdDegreeSearch: at " + direction + ": " + currentDirection + " before 0 " + (bag.contains(ends[0])) + " " + firstIntersectionFound + " " + lostPotential);
 					if(bag.contains(ends[0]))
 					{
 						if(firstIntersectionFound) lostPotential = true;
 						else firstIntersectionFound = true;
 					} /* end if */
 					else bag.add(ends[0]);
+					if(print) System.out.println("ConstraintSearch.thirdDegreeSearch: at " + direction + ": " + currentDirection + " after 0 " + firstIntersectionFound + " " + lostPotential);
 				} /* end if */
 				if(ends[1] != null)
 				{
+					if(print) System.out.println("ConstraintSearch.thirdDegreeSearch: at " + direction + ": " + currentDirection + " before 1 " + (bag.contains(ends[1])) + " " + firstIntersectionFound + " " + lostPotential);
 					if(bag.contains(ends[1]))
 					{
 						if(firstIntersectionFound) lostPotential = true;
 						else firstIntersectionFound = true;
 					} /* end if */
 					else bag.add(ends[1]);
+					if(print) System.out.println("ConstraintSearch.thirdDegreeSearch: at " + direction + ": " + currentDirection + " after 1 " + firstIntersectionFound + " " + lostPotential);
+
 				} /* end if */
 				
 			} /* end while loop */
