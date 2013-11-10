@@ -1,7 +1,6 @@
 package numbrixgame.system.solver;
 
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
 /**

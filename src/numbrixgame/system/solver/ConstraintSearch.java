@@ -67,7 +67,7 @@ public class ConstraintSearch extends SearchMethod
 		boolean constraintFound = false;
 		
 		/* Check the terminal cases */
-		if(current.getValue() >= 0 && current.getValue() <= SearchMethod.system.getNumOfObjects())
+		if(current.getValue() >= 1 && current.getValue() <= SearchMethod.system.getNumOfObjects())
 		{
 			LinkedList<Direction> moves = new LinkedList<Direction>(); // stack of valid moves
 			if(firstDegreeSearch(current, Direction.TOP)) moves.push(Direction.TOP);
@@ -87,13 +87,11 @@ public class ConstraintSearch extends SearchMethod
 			else if(moves.size() > 1)
 			{
 				int size = moves.size();
-				LinkedList<Direction> plausible = new LinkedList<Direction>(); // stack of valid moves that do not connect
 				Direction dir = null;
 				
 				for(int i = 0; i < size; i++)
 				{
 					if(secondDegreeSearch(current, dir = moves.pop(), increment)) moves.add(dir);
-					else plausible.add(dir);
 				} /* end for loop */
 				
 				/* If there is only one direction in which a node has potential, it must be that the

@@ -14,8 +14,8 @@ public abstract class SearchMethod
 		RIGHT(1, 0, 2),
 		START(0, 0, -1);
 		
-		protected final int x;
-		protected final int y;
+		public final int x;
+		public final int y;
 		/* Actually the position of the opposite direction in the grid made by makeGrid */
 		protected final int position; 
 		

@@ -32,10 +32,10 @@ public class NumbrixSystem
 	
 	/************************************ Class Attributes *************************************/
 	protected int gridSize;				// The size of the grid
-	protected boolean[][] staticData;		// a grid that tells us if a position has static(provided) data
+	protected boolean[][] staticData;	// a grid that tells us if a position has static(provided) data
 	protected Integer[][] grid;			// a grid that holds the initial values in the grid
-	protected Player player;				// Whos playing
-	protected File file;					// Initial file
+	protected Player player;			// Whos playing
+	protected File file;				// Initial file
 	protected History history;			// The history of the game
 	protected int numOfObjects;			// Total number of objects in the grid
 	

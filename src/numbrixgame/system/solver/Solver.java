@@ -1,10 +1,6 @@
 package numbrixgame.system.solver;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import numbrixgame.numbrix;
+import java.util.concurrent.TimeUnit;
 import numbrixgame.system.NumbrixSystem;
 import numbrixgame.system.Validator;
 
@@ -44,18 +40,20 @@ public class Solver
 	public void solve()
 	{
 		// Start by getting start time
-		Calendar cal = Calendar.getInstance();
-		this.startTime = cal.getTimeInMillis();
+		this.startTime = System.nanoTime();
 		
 		// Do Search
 		this.initialize();
 		this.constraintSatisfactionSearch();
 		
 		// End by getting end time
-		this.endTime = cal.getTimeInMillis();
+		this.endTime = System.nanoTime();
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		System.out.println(dateFormat.format(cal.getTime()));
+		long milliseconds = TimeUnit.MILLISECONDS.convert(endTime - startTime, TimeUnit.NANOSECONDS);
+		long seconds = TimeUnit.SECONDS.convert(endTime - startTime - milliseconds, TimeUnit.NANOSECONDS);
+		long minutes = TimeUnit.MINUTES.convert(endTime - startTime - seconds, TimeUnit.NANOSECONDS);
+		
+		System.out.println("Finished in " + minutes + ":" + seconds + ":" + milliseconds);
 	} /* end solve method */
 	
 	/**
@@ -76,13 +74,12 @@ public class Solver
 	 */
 	protected boolean constraintSatisfactionSearch()
 	{
-		boolean solved = constraintSearch();
-		System.out.println("Solver.constraintSatisfactionSearch called");
-		numbrix.system().printGrid();
-		System.out.println(this.snake.toString());
+//		boolean solved = constraintSearch();
+		boolean solved = false;
+//		numbrix.system().printGrid();
+//		System.out.println(this.snake.toString());
 		/* If no constraints were found, attempt the heuristic */
 		if (!solved) solved = Solver.heuristic.startSearch(this);
-		System.out.println("Solver.constraintSatisfactionSearch end: " + solved);
 		return solved;
 	} /* end constraintSatisfactionSearch method */
 	

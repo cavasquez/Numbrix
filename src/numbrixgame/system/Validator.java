@@ -1,5 +1,8 @@
 package numbrixgame.system;
 
+import numbrixgame.numbrix;
+import numbrixgame.system.solver.SearchMethod;
+
 
 /*****************************************************************************************************
  * Validator will check the grid for correctness. It well then return a constant pertaining to the state
@@ -9,12 +12,8 @@ package numbrixgame.system;
 public class Validator 
 {
 	/************************************ Class Constants *************************************/
-	private static int X = 0;
-	private static int Y = 1;
-	private static int[] LEFT = {-1, 0};
-	private static int[] RIGHT = {1, 0};
-	private static int[] UP = {0, 1};
-	private static int[] DOWN = {0, -1};
+	private static int X = 1;
+	private static int Y = 0;
 	public static enum State
 	{
 		CORRECT ("Congratulations, the grid is correct! To start a new game, go to File -> New Game. To play again, go to File -> Reset"),
@@ -72,26 +71,26 @@ public class Validator
 		this.state = null;
 		int[] start = new int[2];
 		
-		for(int i = 0; i < gridSize && correct; i++)
+		for(int y = gridSize-1; y >= 0 && correct; y--)
 		{
-			for(int j = 0; j < gridSize && correct; j++)
+			for(int x = 0; x < gridSize && correct; x++)
 			{
 				// Check for empty or non integer values
-				if(grid[i][j] == null) this.state = State.INCORRECT_ELEMENT;
+				if(grid[y][x] == null) this.state = State.INCORRECT_ELEMENT;
 				
 				// Check for out of bound elements
-				else if(grid[i][j] < 1 || grid[i][j] > (gridSize*gridSize)) this.state = State.INCORRECT_SIZE;
+				else if(grid[y][x] < 1 || grid[y][x] > (gridSize*gridSize)) this.state = State.INCORRECT_SIZE;
 				
-				else if(grid[i][j] == 1)
+				else if(grid[y][x] == 1)
 				{// Find location of 1
-					start[X] = j;
-					start[Y] = i;
+					start[X] = x;
+					start[Y] = y;
 				} /* end else if */
 				
 				if(this.state != null) correct = false;
 			} /* end for loop */
 		} /* end for loop */
-		if(correct) this.state = trace(gridSize,start, grid);
+		if(correct) this.state = trace(gridSize, start, grid);
 	} /* end validate method */
 	
 	private final State trace(int gridSize, int[] pos, Integer[][] grid)
@@ -101,22 +100,28 @@ public class Validator
 
 		int curVal = 1;
 		boolean done = false;
+		int terminal = gridSize * gridSize;
 		
 		while(!done)
 		{
-			// Find where the next value is
-			pos = findNext(pos, curVal + 1, gridSize, grid);
+			/* First, check for terminal case */
+			if(curVal == terminal) done = true; // Check to see if all values have been found
+			else
+			{
+				// Find where the next value is
+				pos = findNext(pos, curVal + 1, gridSize, grid);
+				
+				// Check if next value was found
+				if (pos[X] == -1)
+				{// next value not found in correct order
+					done = true;
+					returner = State.INCORRECT_GRID;
+				} /* end if */
+				
+				// Update values
+				curVal++;
+			} /* end else */
 			
-			// Check if next value was found
-			if (pos[X] == -1)
-			{// next value not found in correct order
-				done = true;
-				returner = State.INCORRECT_GRID;
-			} /* end if */
-			
-			// Update values
-			curVal++;
-			if(curVal == (gridSize*gridSize)) done = true; // Check to see if all values have been found
 		} /* end while loop */
 		
 		return returner;
@@ -127,25 +132,25 @@ public class Validator
 		int[] returner = {-1,-1};
 		
 		// Look at all the possible directions
-		if(checkVal(pos[X] + LEFT[X], pos[Y] + LEFT[Y], nextVal, gridSize, grid))
+		if(checkVal(pos[X] + SearchMethod.Direction.LEFT.x, pos[Y] + SearchMethod.Direction.LEFT.y, nextVal, gridSize, grid))
 		{
-			returner[X] = pos[X] + LEFT[X];
-			returner[Y] = pos[Y] + LEFT[Y];
+			returner[X] = pos[X] + SearchMethod.Direction.LEFT.x;
+			returner[Y] = pos[Y] + SearchMethod.Direction.LEFT.y;
 		} /* end if */
-		else if (checkVal(pos[X] + RIGHT[X], pos[Y] + RIGHT[Y], nextVal, gridSize, grid))
+		else if (checkVal(pos[X] + SearchMethod.Direction.RIGHT.x, pos[Y] + SearchMethod.Direction.RIGHT.y, nextVal, gridSize, grid))
 		{
-			returner[X] = pos[X] + RIGHT[X];
-			returner[Y] = pos[Y] + RIGHT[Y];
+			returner[X] = pos[X] + SearchMethod.Direction.RIGHT.x;
+			returner[Y] = pos[Y] + SearchMethod.Direction.RIGHT.y;
 		} /* end else if */
-		else if (checkVal(pos[X] + UP[X], pos[Y] + UP[Y], nextVal, gridSize, grid))
+		else if (checkVal(pos[X] + SearchMethod.Direction.TOP.x, pos[Y] + SearchMethod.Direction.TOP.y, nextVal, gridSize, grid))
 		{
-			returner[X] = pos[X] + UP[X];
-			returner[Y] = pos[Y] + UP[Y];
+			returner[X] = pos[X] + SearchMethod.Direction.TOP.x;
+			returner[Y] = pos[Y] + SearchMethod.Direction.TOP.y;
 		} /* end else if */
-		else if (checkVal(pos[X] + DOWN[X], pos[Y] + DOWN[Y], nextVal, gridSize, grid))
+		else if (checkVal(pos[X] + SearchMethod.Direction.BOTTOM.x, pos[Y] + SearchMethod.Direction.BOTTOM.y, nextVal, gridSize, grid))
 		{
-			returner[X] = pos[X] + DOWN[X];
-			returner[Y] = pos[Y] + DOWN[Y];
+			returner[X] = pos[X] + SearchMethod.Direction.BOTTOM.x;
+			returner[Y] = pos[Y] + SearchMethod.Direction.BOTTOM.y;
 		} /* end else if */
 		
 		return returner;
@@ -154,12 +159,11 @@ public class Validator
 	private final boolean checkVal(int x, int y, int val, int gridSize, Integer[][] grid)
 	{// Check to see if the coordinates are correct and if the provided val is at the coordinate
 		boolean found = false;
-		
 		// First, check for bounds
 		if ( (x < 0 || x  >= gridSize) || (y < 0 || y >= gridSize) ) found = false;
 		
 		// next, check if found
-		else if (grid[x][y] == val) found = true;
+		else if (grid[y][x] == val) found = true;
 		return found;
 	} /* end checkVal method */
 	
