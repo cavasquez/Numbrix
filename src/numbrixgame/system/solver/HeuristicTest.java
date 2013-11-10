@@ -21,7 +21,7 @@ public class HeuristicTest extends SearchTest
 		numbrix.system.printGrid();
 		print(this.solver.snakeString());
 		print("Starting Heuristic Test");
-		HeuristicSearch test = new HeuristicSearch();
+//		HeuristicSearch test = new HeuristicSearch(this);
 		
 	} /* end startTest method */
 

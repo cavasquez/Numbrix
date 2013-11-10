@@ -3,6 +3,8 @@ package numbrixgame.system.solver;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import numbrixgame.numbrix;
 import numbrixgame.system.NumbrixSystem;
 import numbrixgame.system.Validator;
 
@@ -62,7 +64,7 @@ public class Solver
 	protected void initialize()
 	{
 		Solver.snake = new Snake(Solver.system.getGridSize(), Solver.system.getGrid());
-		Solver.heuristic = new HeuristicSearch();
+		Solver.heuristic = new HeuristicSearch(this);
 		SearchMethod.setSnake(Solver.snake);
 		SearchMethod.setSystem(Solver.system);
 	} /* end initialize method */
@@ -75,9 +77,12 @@ public class Solver
 	protected boolean constraintSatisfactionSearch()
 	{
 		boolean solved = constraintSearch();
+		System.out.println("Solver.constraintSatisfactionSearch called");
+		numbrix.system().printGrid();
+		System.out.println(this.snake.toString());
 		/* If no constraints were found, attempt the heuristic */
 		if (!solved) solved = Solver.heuristic.startSearch(this);
-		
+		System.out.println("Solver.constraintSatisfactionSearch end: " + solved);
 		return solved;
 	} /* end constraintSatisfactionSearch method */
 	

@@ -31,8 +31,14 @@ public abstract class SearchMethod
 	/************************************ Class Attributes *************************************/
 	protected static NumbrixSystem system;
 	protected static Snake snake;
+	protected Solver solver;
 	
 	/************************************ Class Methods *************************************/
+	public SearchMethod(Solver solver)
+	{
+		this.solver = solver;
+	} /* end constructor */
+	
 	public static void setSystem(NumbrixSystem system)
 	{
 		SearchMethod.system = system;

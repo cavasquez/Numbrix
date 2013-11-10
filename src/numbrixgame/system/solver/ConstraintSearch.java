@@ -15,14 +15,12 @@ public class ConstraintSearch extends SearchMethod
 {
 	/************************************ Class Attributes *************************************/
 	private Stack<Triple> additions;
-	private Solver solver;
-	private boolean print = false;
 	
 	/************************************ Class Methods *************************************/
 	public ConstraintSearch(Solver solver)
 	{
+		super(solver);
 		this.additions = new Stack<Triple>();
-		this.solver = solver;
 	} /* end the constructor */
 	
 	/**
@@ -157,8 +155,6 @@ public class ConstraintSearch extends SearchMethod
 	} /* end firstPrimeDegreeSearch method */
 	
 	/**
-	 * @deprecated
-	 * THIS IS NOT A FOR SURE SEARCH! DO NOT USE!
 	 * A check to see if the searched at node can contain the value sought for. 
 	 * It does so by looking to see if it can find the the increment node (two
 	 * nodes after the previous node) in the surrounding nodes. If it can, then 
@@ -197,6 +193,8 @@ public class ConstraintSearch extends SearchMethod
 	} /* end secondDegreeSerch method */
 	
 	/**
+	 * @deprecated
+	 * THIS IS NOT A FOR SURE SEARCH! DO NOT USE!
 	 * A check to see if the searched at node cannot contain the sought after value. If it
 	 * cannot, then we can limit the nodes for which can contain the value. 
 	 * @param previous	the callee

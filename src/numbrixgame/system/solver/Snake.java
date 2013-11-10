@@ -1,6 +1,7 @@
 package numbrixgame.system.solver;
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
 /**
@@ -87,6 +88,7 @@ public class Snake
 		{
 			currentList = this.snake.get(current);
 			if (current > 0) previousList = this.snake.get(current - 1);
+
 			//  Look to see if snake is bounded above
 			if(currentList.getFirst().getValue() > triple.getValue())
 			{/* triple is bounded above by the head of the current list */
@@ -154,7 +156,7 @@ public class Snake
 				this.snake.getLast().add(triple);
 			} /* end else */
 		} /* end if */
-	
+				
 	} /* end add method */
 	
 	/**
@@ -392,6 +394,16 @@ public class Snake
 	{
 		return this.snake.get(list).getLast();
 	} /* end getLast method */
+	
+	public boolean hasEmpty()
+	{
+		boolean empty = false;
+		for(int i = 0; i < snake.size(); i++)
+		{
+			if(snake.get(i).size() == 0) empty = true;
+		} /* end for loop */
+		return empty;
+	} /* end hasEmpty method */
 	
 	@Override
 	public String toString()
