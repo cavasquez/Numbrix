@@ -13,8 +13,8 @@ public class ConstraintTest extends SearchTest
 
 	public static void main(String args[])
 	{
-		System.out.println("Starting Cosntraint Test 2");
 		ConstraintTest test = new ConstraintTest(1);
+		System.out.println("Test: " + test.testNum);
 		test.startTest();
 	} /* end main method */
 
@@ -32,14 +32,20 @@ public class ConstraintTest extends SearchTest
 		boolean constraintFound = false;
 		Triple triple = null;
 		constraint = this.solver.getConstraint();
-		
-//		triple = this.constraint.snake.find(5);
-//		print(triple.toString());
-		constraintFound = this.constraint.startSearch(true);
-		print("Constraint found?: " + constraintFound);
+		boolean solved = this.solver.constraintSearch();
 		
 		numbrix.system.printGrid();
 		print(this.solver.snakeString());
+		print("Solved: " + solved);
+		
+		constraint.undo();
+		numbrix.system.printGrid();
+		print(this.solver.snakeString());
+		
+//		triple = this.constraint.snake.find(5);
+//		print(triple.toString());
+//		constraintFound = this.constraint.startSearch(false);
+//		print("Constraint found?: " + constraintFound);
 		
 //		constraintFound = this.constraint.startSearch(true);
 //		print("Constraint found?: " + constraintFound);

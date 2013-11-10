@@ -74,6 +74,19 @@ public class Solver
 	 */
 	protected boolean constraintSatisfactionSearch()
 	{
+		boolean solved = constraintSearch();
+		/* If no constraints were found, attempt the heuristic */
+		if (!solved) solved = Solver.heuristic.startSearch(this);
+		
+		return solved;
+	} /* end constraintSatisfactionSearch method */
+	
+	/**
+	 * Performs the constraint search and returns if the grid is solved.
+	 * @return	state of solution
+	 */
+	protected boolean constraintSearch()
+	{
 		boolean solved = false;
 		boolean constraintFound = true;
 		boolean forwardFound = true;
@@ -107,11 +120,8 @@ public class Solver
 			
 		} /* end while loop */
 		
-		/* If no constraints were found, attempt the heuristic */
-		if (!solved) solved = Solver.heuristic.startSearch(this);
-		
 		return solved;
-	} /* end constraintSatisfactionSearch method */
+	} /* end constraintSearch method */
 	
 	/**
 	 * Returns the amount of time spent solving the Numbrix grid
@@ -181,7 +191,7 @@ public class Solver
 	 */
 	public void remove(Triple triple)
 	{
-		this.remove(triple.getX(), triple.getY(), triple.getY());
+		this.remove(triple.getX(), triple.getY(), triple.getValue());
 	} /* end overloaded remove method */
 	
 	/**

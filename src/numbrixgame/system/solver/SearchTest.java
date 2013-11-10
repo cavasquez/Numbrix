@@ -29,7 +29,6 @@ public abstract class SearchTest extends numbrix
 	
 	public SearchTest(int testNum)
 	{
-		this.gridsize = 9;
 		this.testNum = testNum;
 		this.initialize();
 		this.printOn = true;
@@ -63,7 +62,7 @@ public abstract class SearchTest extends numbrix
 		this.gridSize.add(9);
 		this.gridSize.add(9);
 		this.gridSize.add(3);
-		
+		this.gridsize = gridSize.get(testNum);
 		
 		for(int k = 0; k < TEST_COUNT; k++)
 		{
