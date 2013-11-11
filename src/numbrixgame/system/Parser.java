@@ -81,8 +81,8 @@ public class Parser
 				y = scanner.nextInt();
 				val = scanner.nextInt();
 				
-				staticElements[x][y] = true;
-				grid[x][y] = val;
+				staticElements[y][x] = true;
+				grid[y][x] = val;
 			} /* end for loop */
 			
 			// Clean up

@@ -13,6 +13,13 @@ public class Log
 	private History.Modification change;	// Type of change made
 	
 	/************************************ Class Methods *************************************/
+	/**
+	 * Constructor
+	 * @param x			the x value of the log
+	 * @param y			the y value of the log
+	 * @param val		the value of the log
+	 * @param change	the type of change
+	 */
 	public Log(int x, int y, Integer val, History.Modification change)
 	{
 		this.X = x;

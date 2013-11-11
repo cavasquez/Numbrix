@@ -48,24 +48,24 @@ public class History
 	 * @param y
 	 * @param newVal
 	 */
-	public void logChange(int x, int y, Integer newVal)
+	public void logChange(int row, int column, Integer newVal)
 	{
 		Log newLog = null;
 		
-		if(this.staticVals[x][y]) {/* do nothing if original data is changed. this happens at start. */}
-		else if(newVal == null && hasVal[x][y])
+		if(this.staticVals[row][column]) {/* do nothing if original data is changed. this happens at start. */}
+		else if(newVal == null && hasVal[row][column])
 		{// Check if deletion occurred but do not log deletions of deletions
-			newLog = new Log(x, y, newVal, Modification.DELETE);
-			hasVal[x][y] = false;
+			newLog = new Log(column, row, newVal, Modification.DELETE);
+			hasVal[row][column] = false;
 		} /* end if */
-		else if(hasVal[x][y])
+		else if(hasVal[row][column])
 		{// check if modification was made.
-			newLog = new Log(x, y, newVal, Modification.MODIFY);
+			newLog = new Log(column, row, newVal, Modification.MODIFY);
 		} /* end else if */
 		else if(newVal != null)
 		{// an addition has occurred (unless null. do not log random deletions)
-			newLog = new Log(x, y, newVal, Modification.ADD);
-			hasVal[x][y] = true;
+			newLog = new Log(column, row, newVal, Modification.ADD);
+			hasVal[row][column] = true;
 		} /* end else */
 			
 		if(newLog != null) this.historyLog.add(newLog);
@@ -80,13 +80,13 @@ public class History
 			switch(log.getChange())
 			{// Here, we subtract the gridsize from y because the graph is "inverted"
 				case ADD:
-					changes += Integer.toString(log.getVal()) + " was added to (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(gridSize - log.getY()) + ")\n";
+					changes += Integer.toString(log.getVal()) + " was added to (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(log.getY()) + ")\n";
 					break;
 				case DELETE:
-					changes += "The value at (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(gridSize - log.getY()) + ") was deleted\n";
+					changes += "The value at (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(log.getY()) + ") was deleted\n";
 					break;
 				case MODIFY:
-					changes += "The value at (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(gridSize - log.getY()) + ") was changed to " + Integer.toString(log.getVal()) +"\n";
+					changes += "The value at (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(log.getY()) + ") was changed to " + Integer.toString(log.getVal()) +"\n";
 					break;
 				default:
 					break;

@@ -56,11 +56,16 @@ public class NumbrixSystem
 		this.grid = parser.getGrid();
 		this.numOfObjects = gridSize * gridSize;
 		
+		System.out.println("NumbrixSystem.constructor: before table is made:");
+		this.printGrid();
+		
 		// Create the history (this MUST happen before grid is made)
 		this.history = new History(gridSize, staticData);
 		
 		// Add the grid
 		numbrix.gui().addTable(gridSize, staticData, grid);
+		System.out.println("NumbrixSystem.constructor: After table is made:");
+		this.printGrid();
 		
 		// Add the leftbar
 		numbrix.gui().addLeftDisplay(player);
@@ -118,7 +123,7 @@ public class NumbrixSystem
 	public void modifyGrid(int x, int y, Integer val)
 	{
 		this.grid[y][x] = val;
-		this.history.logChange(x, y, val);
+		this.history.logChange(y, x, val);
 	} /* end modifyGrid method */
 	
 	/**
@@ -130,7 +135,7 @@ public class NumbrixSystem
 	 */
 	public void logChange(int x, int y, Integer newVal)
 	{
-		this.history.logChange(x, y, newVal);
+		this.history.logChange(y, x, newVal);
 	} /* end logChange method */
 	
 	/**

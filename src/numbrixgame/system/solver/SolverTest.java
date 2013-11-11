@@ -32,6 +32,8 @@ public class SolverTest extends SearchTest
 		numbrix.system.printGrid();
 		print(this.solver.snakeString());
 
+		System.out.println("Log:");
+//		System.out.println(numbrix.system.getHistory());
 		
 	} /* end startTest method */
 
