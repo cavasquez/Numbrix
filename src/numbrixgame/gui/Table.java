@@ -43,7 +43,7 @@ public class Table extends JTable
 	@Override
 	public boolean isCellEditable(int row, int column)
 	{// Disable those cells with values that start with the board
-		return !(startData[column][row]);
+		return !(startData[numbrix.system().getGridSize() - column - 1][row]);
 	} /* end editCellAt method */
 	
 	public Integer[][] getGrid()
