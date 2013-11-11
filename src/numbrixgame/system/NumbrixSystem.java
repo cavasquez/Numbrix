@@ -56,16 +56,11 @@ public class NumbrixSystem
 		this.grid = parser.getGrid();
 		this.numOfObjects = gridSize * gridSize;
 		
-		System.out.println("NumbrixSystem.constructor: before table is made:");
-		this.printGrid();
-		
 		// Create the history (this MUST happen before grid is made)
 		this.history = new History(gridSize, staticData);
 		
 		// Add the grid
 		numbrix.gui().addTable(gridSize, staticData, grid);
-		System.out.println("NumbrixSystem.constructor: After table is made:");
-		this.printGrid();
 		
 		// Add the leftbar
 		numbrix.gui().addLeftDisplay(player);

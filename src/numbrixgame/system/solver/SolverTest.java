@@ -12,7 +12,7 @@ public class SolverTest extends SearchTest
 	
 	public static void main(String args[])
 	{
-		SolverTest test = new SolverTest(0); // Note 0 is the only test that makes use of heuristic search
+		SolverTest test = new SolverTest(1); // Note 0 is the only test that makes use of heuristic search
 		System.out.println("Test: " + test.testNum);
 		test.startTest();
 	} /* end main method */
@@ -33,7 +33,7 @@ public class SolverTest extends SearchTest
 		print(this.solver.snakeString());
 
 		System.out.println("Log:");
-//		System.out.println(numbrix.system.getHistory());
+		System.out.println(numbrix.system.getHistory());
 		
 	} /* end startTest method */
 

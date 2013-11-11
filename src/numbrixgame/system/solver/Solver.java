@@ -222,4 +222,12 @@ public class Solver
 		return Solver.heuristic;
 	} /* end getConstraintSearch method */
 	
+	public String getTimeElsapsed()
+	{
+		long milliseconds = TimeUnit.MILLISECONDS.convert(endTime - startTime, TimeUnit.NANOSECONDS);
+		long seconds = TimeUnit.SECONDS.convert(endTime - startTime - milliseconds, TimeUnit.NANOSECONDS);
+		long minutes = TimeUnit.MINUTES.convert(endTime - startTime - seconds, TimeUnit.NANOSECONDS);
+		return("Solver.solve: Finished in " + minutes + ":" + seconds + ":" + milliseconds);
+	} /* end getTimeElapsed method */
+	
 } /* end Solver class */

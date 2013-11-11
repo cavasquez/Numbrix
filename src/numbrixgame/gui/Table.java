@@ -81,7 +81,7 @@ public class Table extends JTable
 	public void setValueAt(Object value, int row, int column, boolean modifyGrid)
 	{// Keep track of changes
 		boolean isNull = false;
-		System.out.println("Table.setValueAt: being modified is " + column + ", " + row + " with " + value);
+		
 		// Check if value was deleted
 		try
 		{
@@ -115,31 +115,19 @@ public class Table extends JTable
 			// Update GUI
 			numbrix.gui().changeHistory(numbrix.system().getHistory());
 		} /* end else */
-		numbrix.system().printGrid();
+		
 	} /* end setValueAt method */
 	
 	/*------------------ Private methods ------------------*/
 	private void populate(int tableSize, Integer[][] grid)
 	{// Go through the grid and populate the table as needed
-		Integer val;
-		String print = "";
 		for(int i = 0; i < tableSize; i++)
 		{
 			for(int j = 0; j < tableSize; j++)
 			{
 				if(grid[i][j] != null) this.setValueAt(grid[i][j], numbrix.system().getGridSize() - i - 1, j, false);
-				val = grid[i][j];
-				if(val == null) print += "__, ";
-				else if((val/10) == 0) print += " " + Integer.toString(val) + ", ";
-				else print += Integer.toString(val) + ", ";
 			} /* end for loop */
-			print += "\n";
 		} /* end for loop */
-		System.out.println("Table.populate: actual data: ");
-		numbrix.system().printGrid();
-		System.out.println("Table.populate: print data: ");
-		numbrix.system().printGrid();
-		System.out.println("The value in the grid at 0,0 is " + grid[0][0]);
 	} /* end  */
 	
 } /* end MainDisplay class */
