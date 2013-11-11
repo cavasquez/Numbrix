@@ -83,7 +83,7 @@ public class GUI extends JFrame
 		this.revalidate();
 	} /* end remoevLeftDisplay */
 	
-	public void changeHistoyr(String newHistory)
+	public void changeHistory(String newHistory)
 	{
 		this.history.setText(newHistory);
 		this.revalidate();

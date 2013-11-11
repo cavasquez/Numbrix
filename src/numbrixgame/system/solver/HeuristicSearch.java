@@ -1,7 +1,6 @@
 package numbrixgame.system.solver;
 
 import java.util.LinkedList;
-
 import numbrixgame.numbrix;
 
 /**
@@ -13,7 +12,6 @@ import numbrixgame.numbrix;
 public class HeuristicSearch extends SearchMethod
 {
 	/************************************ Class Attributes *************************************/
-	
 	
 	/************************************ Class Methods *************************************/
 	public HeuristicSearch(Solver solver)
@@ -30,7 +28,6 @@ public class HeuristicSearch extends SearchMethod
 	public boolean startSearch(Solver solver)
 	{
 		boolean solved = false;
-		
 		/* Look for shortest unsolved path in the snake. Note that this search
 		 * prioritizes non-end points (0 or the last element) because I believe it 
 		 * is a "safer" search when two destinations are known as opposed to

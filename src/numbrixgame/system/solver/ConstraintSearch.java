@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TreeSet;
 
+import numbrixgame.numbrix;
+
 /**
  * The constraint search to be used by the Solver.
  * @author Carlos Vasquez
@@ -29,7 +31,7 @@ public class ConstraintSearch extends SearchMethod
 	 * @return			the success of the search
 	 */
 	public boolean startSearch(boolean forward)
-	{
+	{	
 		boolean constraintFound = false;
 		int nextList = 0;
 		int increment = 1;
@@ -67,7 +69,7 @@ public class ConstraintSearch extends SearchMethod
 		boolean constraintFound = false;
 		
 		/* Check the terminal cases */
-		if(current.getValue() >= 1 && current.getValue() <= SearchMethod.system.getNumOfObjects())
+		if(current.getValue() > 1 && current.getValue() < SearchMethod.system.getNumOfObjects())
 		{
 			LinkedList<Direction> moves = new LinkedList<Direction>(); // stack of valid moves
 			if(firstDegreeSearch(current, Direction.TOP)) moves.push(Direction.TOP);

@@ -44,7 +44,10 @@ public class Solver
 		
 		// Do Search
 		this.initialize();
-		this.constraintSatisfactionSearch();
+//		boolean solved = constraintSearch();
+//		if(!solved) solved = this.constraintSatisfactionSearch();
+		
+		boolean solved = this.constraintSatisfactionSearch();
 		
 		// End by getting end time
 		this.endTime = System.nanoTime();
@@ -53,7 +56,8 @@ public class Solver
 		long seconds = TimeUnit.SECONDS.convert(endTime - startTime - milliseconds, TimeUnit.NANOSECONDS);
 		long minutes = TimeUnit.MINUTES.convert(endTime - startTime - seconds, TimeUnit.NANOSECONDS);
 		
-		System.out.println("Finished in " + minutes + ":" + seconds + ":" + milliseconds);
+		System.out.println("Solver.solve: solved? " + solved);
+		System.out.println("Solver.solve: Finished in " + minutes + ":" + seconds + ":" + milliseconds);
 	} /* end solve method */
 	
 	/**
@@ -74,12 +78,11 @@ public class Solver
 	 */
 	protected boolean constraintSatisfactionSearch()
 	{
-//		boolean solved = constraintSearch();
-		boolean solved = false;
-//		numbrix.system().printGrid();
-//		System.out.println(this.snake.toString());
+		boolean solved = constraintSearch();
+		
 		/* If no constraints were found, attempt the heuristic */
 		if (!solved) solved = Solver.heuristic.startSearch(this);
+		
 		return solved;
 	} /* end constraintSatisfactionSearch method */
 	

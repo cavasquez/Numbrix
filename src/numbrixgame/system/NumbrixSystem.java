@@ -109,6 +109,12 @@ public class NumbrixSystem
 		return returner;
 	} /* end makeGrid method */
 	
+	/**
+	 * Modifies the grid and logs the change
+	 * @param x
+	 * @param y
+	 * @param val
+	 */
 	public void modifyGrid(int x, int y, Integer val)
 	{
 		this.grid[y][x] = val;

@@ -42,6 +42,12 @@ public class History
 		
 	} /* end History class */
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param newVal
+	 */
 	public void logChange(int x, int y, Integer newVal)
 	{
 		Log newLog = null;

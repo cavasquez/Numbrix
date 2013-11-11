@@ -104,11 +104,11 @@ public class Table extends JTable
 		} /* end if */
 		else
 		{// This is a valid input. Log and apply change
-			numbrix.system().logChange(row, column, val);
+			numbrix.system().modifyGrid(row, column, val);
 			super.setValueAt(value, row, column);
-			//System.out.println("History: " + Numbrix.system().getHistory());
+			
 			// Update GUI
-			numbrix.gui().changeHistoyr(numbrix.system().getHistory());
+			numbrix.gui().changeHistory(numbrix.system().getHistory());
 		} /* end else */
 		
 	} /* end setValueAt method */
