@@ -71,7 +71,11 @@ public class NumbrixSystem
 			// Solve
 			Solver solver = new Solver(this);
 			solver.solve();
-			// Set button to view solution step by step
+			
+			// Updaste GUI
+			numbrix.gui().addTable(gridSize, staticData, this.grid);
+			numbrix.gui().printMessage("Numbrix grid solved in " + solver.getTimeElsapsed() + " (MM:SS:mm)");
+			numbrix.gui().changeHistory(numbrix.system().getHistory());
 			
 		} /* end if */
 	} /* end setup method */

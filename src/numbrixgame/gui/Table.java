@@ -113,7 +113,7 @@ public class Table extends JTable
 			super.setValueAt(value, row, column);
 			
 			// Update GUI
-			numbrix.gui().changeHistory(numbrix.system().getHistory());
+			if(modifyGrid) numbrix.gui().changeHistory(numbrix.system().getHistory());
 		} /* end else */
 		
 	} /* end setValueAt method */

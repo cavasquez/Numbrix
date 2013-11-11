@@ -55,9 +55,10 @@ public class Solver
 		long milliseconds = TimeUnit.MILLISECONDS.convert(endTime - startTime, TimeUnit.NANOSECONDS);
 		long seconds = TimeUnit.SECONDS.convert(endTime - startTime - milliseconds, TimeUnit.NANOSECONDS);
 		long minutes = TimeUnit.MINUTES.convert(endTime - startTime - seconds, TimeUnit.NANOSECONDS);
+		String print = "Solver.solve: Finished in " + minutes + ":" + seconds + ":" + milliseconds;
 		
 		System.out.println("Solver.solve: solved? " + solved);
-		System.out.println("Solver.solve: Finished in " + minutes + ":" + seconds + ":" + milliseconds);
+		System.out.println(print);
 	} /* end solve method */
 	
 	/**
@@ -222,12 +223,18 @@ public class Solver
 		return Solver.heuristic;
 	} /* end getConstraintSearch method */
 	
+	/**
+	 * Returns a formatted string of the time spent in MM:SS:mm
+	 * @return	a formatted string of the time spent in MM:SS:mm
+	 */
 	public String getTimeElsapsed()
 	{
-		long milliseconds = TimeUnit.MILLISECONDS.convert(endTime - startTime, TimeUnit.NANOSECONDS);
-		long seconds = TimeUnit.SECONDS.convert(endTime - startTime - milliseconds, TimeUnit.NANOSECONDS);
-		long minutes = TimeUnit.MINUTES.convert(endTime - startTime - seconds, TimeUnit.NANOSECONDS);
-		return("Solver.solve: Finished in " + minutes + ":" + seconds + ":" + milliseconds);
+		String returner = null;
+		long milliseconds = TimeUnit.MILLISECONDS.convert(this.endTime - this.startTime, TimeUnit.NANOSECONDS);
+		long seconds = TimeUnit.SECONDS.convert(this.endTime - this.startTime - milliseconds, TimeUnit.NANOSECONDS);
+		long minutes = TimeUnit.MINUTES.convert(this.endTime - this.startTime - seconds, TimeUnit.NANOSECONDS);
+		returner = minutes + ":" + seconds + ":" + milliseconds;
+		return returner;
 	} /* end getTimeElapsed method */
 	
 } /* end Solver class */
