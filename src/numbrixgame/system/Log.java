@@ -49,4 +49,12 @@ public class Log
 		return this.change;
 	} /* end getChange method */
 	
+//	@Override
+//	public String toString()
+//	{
+//		String returner = "";
+//		returner = "X: " + this.X + " Y: " + this.Y + " val: " + this.val + " change: " + this.change; 
+//		return returner;
+//	} /* end toString method */
+	
 } /* end Log class */

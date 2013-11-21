@@ -3,6 +3,7 @@ package numbrixgame.gui;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
+import numbrixgame.numbrix;
 import numbrixgame.gui.leftdisplay.LeftDisplay;
 import numbrixgame.gui.menubar.Menubar;
 import numbrixgame.system.NumbrixSystem;
@@ -50,7 +51,6 @@ public class GUI extends JFrame
 		// Add MainDisplay to center
 		this.add(table, BorderLayout.CENTER);
 		
-		System.out.println();
 		// Re render
 		this.revalidate();
 	} /* end setMainDisplay */
@@ -63,6 +63,11 @@ public class GUI extends JFrame
 		// Re render
 		this.revalidate();
 	} /* end removeMainDisplay method */
+	
+	public void revalidateTable()
+	{
+		this.addTable(numbrix.system().getGridSize(), numbrix.system().getStaticData(), numbrix.system().getGrid());
+	} /* end revalidateTable */
 	
 	public void addLeftDisplay(NumbrixSystem.Player playerType)
 	{

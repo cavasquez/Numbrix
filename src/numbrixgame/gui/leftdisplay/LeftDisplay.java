@@ -2,7 +2,7 @@ package numbrixgame.gui.leftdisplay;
 
 import javax.swing.JButton;
 import javax.swing.JToolBar;
-
+import numbrixgame.numbrix;
 import numbrixgame.system.NumbrixSystem;
 
 /*****************************************************************************************************
@@ -42,7 +42,16 @@ public class LeftDisplay extends JToolBar
 	} /* end initializeHuman method */
 	
 	private final void initializeComputer()
-	{
+	{// Give the user an option to complete the table and see the entire board or step through
+		JButton next = new JButton("Next Move");
+		next.setToolTipText("Click to step through to the next move in the solution.");
+		next.addActionListener(new NextActionListener(numbrix.system().getSolver()));
+		this.add(next);
+		
+		JButton complete = new JButton("Complete");
+		complete.setToolTipText("Click to see the completed board and the history of the steps to achieve completion.");
+		complete.addActionListener(new CompleteActionListener(numbrix.system().getSolver()));
+		this.add(complete);
 		
 	} /* end initializeComputer method */
 

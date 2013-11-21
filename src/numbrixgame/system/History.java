@@ -21,6 +21,7 @@ public class History
 	private boolean[][] staticVals;				// Grid indicating the cells that start populated
 	private boolean[][] hasVal;					// Grid that indicates if a grid has a value (it ignores staticVals) 
 	private int gridSize;						// Size of the grid
+	private String incrementLog;				// Increment log
 	
 	/************************************ Class Methods *************************************/
 	public History(int gridSize, boolean[][] staticVals)
@@ -28,6 +29,7 @@ public class History
 		this.historyLog = new ArrayList<Log>();
 		this.staticVals = staticVals;
 		this.gridSize = gridSize;
+		this.incrementLog = "";
 		
 		// initialize hasVal
 		hasVal = new boolean[gridSize][];
@@ -41,6 +43,13 @@ public class History
 		} /* end for loop */
 		
 	} /* end History class */
+	
+	public History(int gridSize, boolean[][] staticVals, ArrayList<Log> historyLog, boolean[][] hasVal)
+	{
+		this(gridSize, staticVals);
+		this.historyLog.addAll(historyLog);
+		this.hasVal = hasVal;
+	} /* end overloaded constructor */
 	
 	/**
 	 * 
@@ -77,24 +86,49 @@ public class History
 		
 		for(Log log : historyLog)
 		{
-			switch(log.getChange())
-			{// Here, we subtract the gridsize from y because the graph is "inverted"
-				case ADD:
-					changes += Integer.toString(log.getVal()) + " was added to (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(log.getY()) + ")\n";
-					break;
-				case DELETE:
-					changes += "The value at (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(log.getY()) + ") was deleted\n";
-					break;
-				case MODIFY:
-					changes += "The value at (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(log.getY()) + ") was changed to " + Integer.toString(log.getVal()) +"\n";
-					break;
-				default:
-					break;
-			} /* end switch */
+			changes += this.logToString(log);
 		} /* end for loop */
 		
 		return changes;
 	} /* end getLog method */
+	
+	/**
+	 * Used by a process that knows the log has been updated and wishes to update the increment log string
+	 */
+	public void incrementLog()
+	{/* Add the last change */
+		this.incrementLog += this.logToString(this.historyLog.get(this.historyLog.size()-1));
+	} /* end incrementLog method */
+	
+	private String logToString(Log log)
+	{
+		String change = "";
+		switch(log.getChange())
+		{// Here, we subtract the gridsize from y because the graph is "inverted"
+			case ADD:
+				change = Integer.toString(log.getVal()) + " was added to (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(log.getY()) + ")\n";
+				break;
+			case DELETE:
+				change = "The value at (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(log.getY()) + ") was deleted\n";
+				break;
+			case MODIFY:
+				change = "The value at (" + Integer.toString(log.getX()) + ", " + Integer.toHexString(log.getY()) + ") was changed to " + Integer.toString(log.getVal()) +"\n";
+				break;
+			default:
+				break;
+		} /* end switch */
+		return change;
+	} /* end changeToString */
+	
+	public String getIncrementLog()
+	{
+		return this.incrementLog;
+	} /* end getIncrementLog methoe */
+	
+	public ArrayList<Log> getHistoryLog()
+	{
+		return this.historyLog;
+	} /* end getHistoryLog method */
 	
 	public int getSize()
 	{
