@@ -16,7 +16,7 @@ public class LeftDisplay extends JToolBar
 	private static final long serialVersionUID = 7289612130330416712L;
 	
 	/*************************** Class Methods ***************************/
-	public LeftDisplay(NumbrixSystem.Player playerType)
+	public void initialize(NumbrixSystem.Player playerType)
 	{
 		// Initialize the correct type
 		switch(playerType)
@@ -30,7 +30,7 @@ public class LeftDisplay extends JToolBar
 			default: /* Do nothing */
 				break;
 		} /* end switch */
-	} /* end constructor */
+	} /* end initialize method */
 	
 	/*------------------ Private methods ------------------*/
 	private final void initializeHuman()
@@ -43,6 +43,7 @@ public class LeftDisplay extends JToolBar
 	
 	private final void initializeComputer()
 	{// Give the user an option to complete the table and see the entire board or step through
+		// Next must be created first so it can init ComputerAcitonListener
 		JButton next = new JButton("Next Move");
 		next.setToolTipText("Click to step through to the next move in the solution.");
 		next.addActionListener(new NextActionListener(numbrix.system().getSolver()));

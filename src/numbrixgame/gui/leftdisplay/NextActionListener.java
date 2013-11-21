@@ -23,7 +23,7 @@ public class NextActionListener extends ComputerActionListener
 	/************************************ Class Methods *************************************/
 	public NextActionListener(Solver solver)
 	{
-		super(solver);
+		super(solver, true);
 		this.totalMoves = ComputerActionListener.historyLog.size();
 	} /* end NextActionListener */
 	

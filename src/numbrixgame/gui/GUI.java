@@ -72,8 +72,12 @@ public class GUI extends JFrame
 	public void addLeftDisplay(NumbrixSystem.Player playerType)
 	{
 		this.removeLeftDisplay();
-		this.left = new LeftDisplay(playerType);
-		this.add(new LeftDisplay(playerType), BorderLayout.WEST);
+		if(this.left == null)
+		{
+			this.left = new LeftDisplay();
+			this.add(this.left, BorderLayout.WEST);
+		}
+		this.left.initialize(playerType);
 		
 		// Re render
 		this.revalidate();
@@ -81,7 +85,7 @@ public class GUI extends JFrame
 	
 	public void removeLeftDisplay()
 	{
-		if(this.left != null)this.remove(this.left);
+		if(this.left != null)this.left.removeAll();
 		this.left = null;
 		
 		// Re render

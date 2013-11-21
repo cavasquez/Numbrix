@@ -25,22 +25,22 @@ public abstract class ComputerActionListener implements ActionListener
 	protected static Solver solver;
 	
 	/************************************ Class Methods *************************************/
-	public ComputerActionListener(Solver solver)
+	public ComputerActionListener(Solver solver, boolean init)
 	{
 		ComputerActionListener.solver = solver;
-		ComputerActionListener.time = "Numbrix grid solved in " + solver.getTimeElsapsed() + " (MM:SS:mm). ";
+		if(ComputerActionListener.solver.getSolutionFound()) ComputerActionListener.time = "Solution found. ";
+		else ComputerActionListener.time = "Solution not found. ";
+		ComputerActionListener.time = "Time consumed was " + solver.getTimeElsapsed() + " (MM:SS:mm). ";
 		ComputerActionListener.next = 0;
 		
-		// Keep a record of the solvers history
-		if(ComputerActionListener.historyLog == null)
+		
+		if(init == true)
 		{
+			// Keep a record of the solvers history
 			ComputerActionListener.historyLog = new ArrayList<Log>();
 			ComputerActionListener.historyLog.addAll(numbrix.system().getHistoryLog());
-		} /* end if */
-		
-		// Keep a copy of the solved grid
-		if(ComputerActionListener.grid == null)
-		{
+			
+			// Keep a copy of the solved grid
 			Integer[][] tempGrid = numbrix.system().getGrid();
 			ComputerActionListener.grid = new Integer[numbrix.system().getGridSize()][];
 			for(int i = 0; i < numbrix.system().getGridSize(); i++)
@@ -51,6 +51,7 @@ public abstract class ComputerActionListener implements ActionListener
 					ComputerActionListener.grid[i][j] = tempGrid[i][j];
 				} /* end for loop */
 			} /* end for loop */
+			
 		} /* end if */
 		
 		// Update Message

@@ -17,7 +17,7 @@ public class CompleteActionListener extends ComputerActionListener
 	/************************************ Class Methods *************************************/
 	public CompleteActionListener(Solver solver)
 	{
-		super(solver);
+		super(solver, false);
 	} /* end constructor */
 	
 	@Override

@@ -21,6 +21,7 @@ public class Solver
 	private ConstraintSearch constraint;
 	private long startTime;
 	private long endTime;
+	private boolean solutionFound;
 	
 	/************************************ Class Methods *************************************/
 	public Solver(NumbrixSystem system)
@@ -32,6 +33,7 @@ public class Solver
 	public Solver()
 	{
 		this.constraint = new ConstraintSearch(this);
+		this.solutionFound = false;
 	} /* end overdriven constructor */
 	
 	/**
@@ -44,21 +46,13 @@ public class Solver
 		
 		// Do Search
 		this.initialize();
-//		boolean solved = constraintSearch();
-//		if(!solved) solved = this.constraintSatisfactionSearch();
-		
-		boolean solved = this.constraintSatisfactionSearch();
+		this.solutionFound = this.constraintSatisfactionSearch();
 		
 		// End by getting end time
 		this.endTime = System.nanoTime();
 		
-		long milliseconds = TimeUnit.MILLISECONDS.convert(endTime - startTime, TimeUnit.NANOSECONDS);
-		long seconds = TimeUnit.SECONDS.convert(endTime - startTime - milliseconds, TimeUnit.NANOSECONDS);
-		long minutes = TimeUnit.MINUTES.convert(endTime - startTime - seconds, TimeUnit.NANOSECONDS);
-		String print = "Solver.solve: Finished in " + minutes + ":" + seconds + ":" + milliseconds;
-		
-		System.out.println("Solver.solve: solved? " + solved);
-		System.out.println(print);
+		System.out.println("Solver.solve: solved? " + this.solutionFound);
+		System.out.println(this.getTimeElsapsed());
 	} /* end solve method */
 	
 	/**
@@ -79,7 +73,7 @@ public class Solver
 	 */
 	protected boolean constraintSatisfactionSearch()
 	{
-		boolean solved = constraintSearch();
+		boolean solved = this.constraintSearch();
 		
 		/* If no constraints were found, attempt the heuristic */
 		if (!solved) solved = Solver.heuristic.startSearch(this);
@@ -236,5 +230,10 @@ public class Solver
 		returner = minutes + ":" + seconds + ":" + milliseconds;
 		return returner;
 	} /* end getTimeElapsed method */
+	
+	public boolean getSolutionFound()
+	{
+		return this.solutionFound;
+	} /* end getSolutionFound method */
 	
 } /* end Solver class */
