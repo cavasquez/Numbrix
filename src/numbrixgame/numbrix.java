@@ -5,10 +5,10 @@ import javax.swing.SwingUtilities;
 import numbrixgame.gui.GUI;
 import numbrixgame.system.NumbrixSystem;
 
-/*****************************************************************************************************
+/**
  * Numbrix will be the "main" of the project. It will construct the components needed to run and then
  * run the program.
- *****************************************************************************************************/
+ */
 
 public class numbrix
 {
@@ -33,22 +33,36 @@ public class numbrix
 	} /* end main method */
 	
 	/*------------------ Public methods ------------------*/
+	/**
+	 * Returns system
+	 * @return	system
+	 */
 	public static final NumbrixSystem system()
 	{
 		return system;
 	} /* end system method */
 	
+	/**
+	 * Returns gui
+	 * @return	gui
+	 */
 	public static final GUI gui()
 	{
 		return gui;
 	} /* end gui method */
 	
 	/*------------------ Private methods ------------------*/
+	/**
+	 * Initializes gui
+	 */
 	protected static final void initializeUI()
 	{// Create the UI
 		numbrix.gui = new GUI();
 	} /* end initializeUI method */
 	
+	/**
+	 * Initializes system
+	 */
 	protected static final void initializeSystem()
 	{// Create the system
 		numbrix.system = new NumbrixSystem();

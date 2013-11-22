@@ -30,7 +30,7 @@ public abstract class ComputerActionListener implements ActionListener
 		ComputerActionListener.solver = solver;
 		if(ComputerActionListener.solver.getSolutionFound()) ComputerActionListener.time = "Solution found. ";
 		else ComputerActionListener.time = "Solution not found. ";
-		ComputerActionListener.time = "Time consumed was " + solver.getTimeElsapsed() + " (MM:SS:mm). ";
+		ComputerActionListener.time += "Time consumed was " + solver.getTimeElsapsed() + " (MM:SS:mm). ";
 		ComputerActionListener.next = 0;
 		
 		
@@ -51,6 +51,9 @@ public abstract class ComputerActionListener implements ActionListener
 					ComputerActionListener.grid[i][j] = tempGrid[i][j];
 				} /* end for loop */
 			} /* end for loop */
+			
+			// Remove old history
+			numbrix.gui().changeHistory("");
 			
 		} /* end if */
 		

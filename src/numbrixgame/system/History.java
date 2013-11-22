@@ -2,9 +2,9 @@ package numbrixgame.system;
 
 import java.util.ArrayList;
 
-/*****************************************************************************************************
+/**
  * History will keep track of all the player made changes made to the grid.
- ******************************************************************************************************/
+ */
 
 public class History 
 {
@@ -52,10 +52,10 @@ public class History
 	} /* end overloaded constructor */
 	
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param newVal
+	 * Logs what kind of change occurred along with the change.
+	 * @param x			x coordinate of change
+	 * @param y			y coordinate of change
+	 * @param newVal	value of change
 	 */
 	public void logChange(int row, int column, Integer newVal)
 	{
@@ -80,6 +80,10 @@ public class History
 		if(newLog != null) this.historyLog.add(newLog);
 	} /* end logChange method */
 	
+	/**
+	 * Returns a String format of the log
+	 * @return	a String format of the log
+	 */
 	public String getLog()
 	{// Create a string of the changes
 		String changes = "";
@@ -120,16 +124,28 @@ public class History
 		return change;
 	} /* end changeToString */
 	
+	/**
+	 * Returns incrementlog
+	 * @return	incrementlog
+	 */
 	public String getIncrementLog()
 	{
 		return this.incrementLog;
-	} /* end getIncrementLog methoe */
+	} /* end getIncrementLog method */
 	
+	/**
+	 * Returns historyLog
+	 * @return	historyLog
+	 */
 	public ArrayList<Log> getHistoryLog()
 	{
 		return this.historyLog;
 	} /* end getHistoryLog method */
 	
+	/**
+	 * Returns the size of the log
+	 * @return	the size of the log
+	 */
 	public int getSize()
 	{
 		return this.historyLog.size();

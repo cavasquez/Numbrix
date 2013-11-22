@@ -2,13 +2,12 @@ package numbrixgame.system;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import numbrixgame.numbrix;
 import numbrixgame.system.solver.Solver;
 
-/*****************************************************************************************************
+/**
  * NumbrixSystem will take care of the back end for Numbrix.
- ******************************************************************************************************/
+ */
 
 public class NumbrixSystem 
 {
@@ -45,6 +44,11 @@ public class NumbrixSystem
 	/************************************ Class Methods *************************************/
 	public NumbrixSystem() {/* Do nothing */}
 	
+	/**
+	 * Sets up the grid and gui given the player and data
+	 * @param player	the type of player (HUMAN, or COMPUTER)
+	 * @param file		the grid data
+	 */
 	public void setup(Player player, File file)
 	{// Setup is called when the user chooses to start a new game. 
 		/* Setup will take in the input and finish creating the gui while
@@ -77,8 +81,14 @@ public class NumbrixSystem
 		// Add the leftbar
 		numbrix.gui().addLeftDisplay(player);
 		
+		// Clear history
+		numbrix.gui().changeHistory("");
+		
 	} /* end setup method */
 	
+	/**
+	 * Undoes changes made and restores the grid to its original state
+	 */
 	public void reset()
 	{// Reset the grid
 		this.setup(this.player, this.file);
@@ -104,17 +114,30 @@ public class NumbrixSystem
 	} /* end resetSystem method */
 	
 	/*------------------ Public methods ------------------*/
+	/**
+	 * Returns the validity of the grid
+	 * @param grid	the grid being validated
+	 * @return		the validity of the grid
+	 */
 	public Validator.State verify(Integer[][] grid)
 	{// Verify the grid and return its state
 		Validator validator = new Validator(gridSize, grid);
 		return validator.getState();
 	} /* end verify method */
 	
+	/**
+	 * Returns the validity of grid
+	 * @return	the validity of grid
+	 */
 	public Validator.State verify()
 	{
 		return this.verify(this.grid);
 	} /* end overloaded verify method */
 	
+	/**
+	 * Creates an empty 2D array of size gridSize x gridSize
+	 * @return	an empty 2D array of size gridSize x gridSize
+	 */
 	public Integer[][] makeGrid()
 	{// Return a grid of nulls that has the correct size
 		Integer[][] returner = new Integer[gridSize][];
@@ -203,26 +226,48 @@ public class NumbrixSystem
 	} /* end printGrid method */
  	
 	/*------------------ Getter methods ------------------*/
+	/**
+	 * Returns gridSize
+	 * @return	gridSize
+	 */
 	public int getGridSize()
 	{
 		return this.gridSize;
 	} /* end getGridSize method */
 	
+	/**
+	 * Returns player
+	 * @return	player
+	 */
 	public Player getPlayer()
 	{
 		return this.player;
 	} /* end getPlayer method */
 	
+	/**
+	 * Returns solver
+	 * @return	solver
+	 */
 	public Solver getSolver()
 	{
 		return this.solver;
 	} /* end getStaticGrid method */
 	
+	/**
+	 * Returns grid
+	 * @return	grid
+	 */
 	public Integer[][] getGrid()
 	{
 		return this.grid;
 	} /* end getGrid method */
 	
+	/**
+	 * Returns the value of the grid at the given x and y
+	 * @param x	the x coordinate
+	 * @param y	the y coordinate
+	 * @return	the value of the grid at the given x and y
+	 */
 	public Integer getVal(int x, int y)
 	{
 		Integer returner = null;
@@ -230,26 +275,46 @@ public class NumbrixSystem
 		return returner;
 	} /* end getVal method */
 	
+	/**
+	 * Returns staticData: a 2D array that tells which positions cannot be changed
+	 * @return	staticData
+	 */
 	public boolean[][] getStaticData()
 	{
 		return this.staticData;
 	} /* end getStaticData method */
 	
+	/**
+	 * Returns the formatted string of hitsories log
+	 * @return	the formatted string of hitsories log
+	 */
 	public String getHistory()
 	{
 		return this.history.getLog();
 	} /* end getHistory method */
 	
+	/**
+	 * Returns the log of history
+	 * @return	the log of history
+	 */
 	public ArrayList<Log> getHistoryLog()
 	{
 		return this.history.getHistoryLog();
 	} /* end getHistoryLog method */
 	
+	/**
+	 * Returns numOfObjects
+	 * @return	numOfObjects
+	 */
 	public int getNumOfObjects()
 	{
 		return this.numOfObjects;
 	} /* end getNumOfObjects method */
 	
+	/**
+	 * Returns the formatted string of histories incrementLog
+	 * @return	the formatted string of histories incrementLog
+	 */
 	public String getIncrementLog()
 	{
 		this.history.incrementLog();

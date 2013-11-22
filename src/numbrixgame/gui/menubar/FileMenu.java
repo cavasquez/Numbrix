@@ -6,9 +6,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-/*****************************************************************************************************
+/**
  * FileMenu will create the file menu that will be added to the menu tool bar
- *****************************************************************************************************/
+ */
 
 public class FileMenu extends JMenu
 {
@@ -28,6 +28,10 @@ public class FileMenu extends JMenu
 
 	} /* end constructor */
 	
+	/**
+	 * Creates and returns the JMenuItem for "New Game"
+	 * @return	the JMenuItem for "New Game"
+	 */
 	private static final JMenuItem newMenuItem()
 	{
 		JMenuItem newMenuItem = new JMenuItem("New Game");
@@ -37,6 +41,10 @@ public class FileMenu extends JMenu
         return newMenuItem;
 	} /* end  */
 	
+	/**
+	 * Creates and returns the JMenuItem for "Reset"
+	 * @return	the JMenuItem for "Reset"
+	 */
 	private static final JMenuItem resetMenuItem()
 	{
 		JMenuItem resetMenuItem = new JMenuItem("Reset");
@@ -46,6 +54,10 @@ public class FileMenu extends JMenu
         return resetMenuItem;
 	} /* end  */
 	
+	/**
+	 * Creates and returns the JMenuItem for "Exit"
+	 * @return	the JMenuItem for "Exit"
+	 */
 	private static final JMenuItem exitMenuItem()
 	{
 		JMenuItem exitMenuItem = new JMenuItem("Exit");

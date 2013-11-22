@@ -5,10 +5,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.TextArea;
 
-/*****************************************************************************************************
+/**
  * BottomDisplay will take care of the bottom display in the GUI. This will contain a text box that will
  * be used to display messages to the user.
- *****************************************************************************************************/
+ */
 
 public class BottomDisplay extends TextArea
 {
@@ -32,4 +32,5 @@ public class BottomDisplay extends TextArea
 		this.setPreferredSize(new Dimension(GUI.WIDTH, 150));
 		
 	} /* end constructor */
+	
 } /* end BottomDisplay class */

@@ -7,9 +7,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import numbrixgame.numbrix;
 import numbrixgame.system.Validator;
 
-/*****************************************************************************************************
+/**
  * Table will be the table created that will act as the UI for Numbrix.
- *****************************************************************************************************/
+ */
 
 public class Table extends JTable
 {
@@ -46,6 +46,10 @@ public class Table extends JTable
 		return !(startData[numbrix.system().getGridSize() - column - 1][row]);
 	} /* end editCellAt method */
 	
+	/**
+	 * Returns a 2D array that represents the table
+	 * @return	a 2D array that represents the table
+	 */
 	public Integer[][] getGrid()
 	{
 		Integer[][] grid = numbrix.system().makeGrid();
@@ -119,6 +123,11 @@ public class Table extends JTable
 	} /* end setValueAt method */
 	
 	/*------------------ Private methods ------------------*/
+	/**
+	 * Populates the table with the given grid
+	 * @param tableSize	the size of the table
+	 * @param grid		the grid that will populate the table
+	 */
 	private void populate(int tableSize, Integer[][] grid)
 	{// Go through the grid and populate the table as needed
 		for(int i = 0; i < tableSize; i++)

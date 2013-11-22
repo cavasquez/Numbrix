@@ -8,9 +8,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-/*****************************************************************************************************
+/**
  * Parser will parse the file provided by the user to determine the grid size and static elements
- *****************************************************************************************************/
+ */
 
 public class Parser 
 {
@@ -26,22 +26,38 @@ public class Parser
 	} /* end constructor */
 	
 	/*------------------ Public methods ------------------*/	
+	/**
+	 * Returns gridSize
+	 * @return	gridSize
+	 */
 	public int getGridSize()
 	{
 		return gridSize;
 	} /* end getGridSize method */
 	
+	/**
+	 * Returns staticElements
+	 * @return	staticElements
+	 */
 	public boolean[][] getStatic()
 	{
 		return staticElements;
 	} /* end getStatic */
 	
+	/**
+	 * Returns grid
+	 * @return	grid
+	 */
 	public Integer[][] getGrid()
 	{
 		return grid;
 	} /* end getGrid method */
 	
 	/*------------------ Private methods ------------------*/
+	/**
+	 * Takes in the formatted file and creates a Numbrix grid from the contents.
+	 * @param file	the file being parsed
+	 */
 	private void parse(File file)
 	{
 		// Create the input stream

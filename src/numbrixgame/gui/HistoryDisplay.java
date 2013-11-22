@@ -4,9 +4,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.TextArea;
 
-/*****************************************************************************************************
+/**
  * HistoryDisplay will display the history of the game
- *****************************************************************************************************/
+ */
 
 public class HistoryDisplay extends TextArea
 {

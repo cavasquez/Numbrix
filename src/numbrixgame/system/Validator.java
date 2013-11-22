@@ -1,13 +1,12 @@
 package numbrixgame.system;
 
-import numbrixgame.numbrix;
 import numbrixgame.system.solver.SearchMethod;
 
 
-/*****************************************************************************************************
+/**
  * Validator will check the grid for correctness. It well then return a constant pertaining to the state
  * of the board.
- *****************************************************************************************************/
+ */
 
 public class Validator 
 {
@@ -45,11 +44,21 @@ public class Validator
 	} /* end constructor */
 	
 	/*------------------ Public methods ------------------*/
+	/**
+	 * Returns state
+	 * @return	state
+	 */
 	public State getState()
 	{
 		return state;
 	} /* end getState method */
 	
+	/**
+	 * Returns the validity of the given value.
+	 * @param value		the value being validated
+	 * @param gridSize	the size of the grid
+	 * @return			the validity of the given value
+	 */
 	public static State validateInput(Integer value, int gridSize)
 	{
 		State check = null;
@@ -64,6 +73,11 @@ public class Validator
 	} /* end validateInput metho */
 	
 	/*------------------ Private methods ------------------*/
+	/**
+	 * Validates the given grid
+	 * @param gridSize	the size of hte grid
+	 * @param grid		the grid being validated
+	 */
 	private final void validate(int gridSize, Integer[][] grid)
 	{// Check the grid for correctness
 		// First, check for null or out of bound values aswell as the location of the first value(1)
@@ -93,6 +107,16 @@ public class Validator
 		if(correct) this.state = trace(gridSize, start, grid);
 	} /* end validate method */
 	
+	/**
+	 * Returns whether or not the grid is correctly completed. It does so by starting
+	 * from the cell with the value 1 and attempting to create an unbroken path of 
+	 * consecutively increasing cells in a non-diagonal direction until the last value
+	 * (gridSize x gridSize) is found.
+	 * @param gridSize	the size of the grid
+	 * @param pos		the position of the cell with value 1
+	 * @param grid		the grid being validated
+	 * @return			the validity of the grid
+	 */
 	private final State trace(int gridSize, int[] pos, Integer[][] grid)
 	{// trace is the function that will check the grid for actual game completion
 		// Note that pos should start with the position of element 1
@@ -127,6 +151,14 @@ public class Validator
 		return returner;
 	} /* end trace method */
 	
+	/**
+	 * Used by trace to help find the next non-diagonal cell that contains the next number.
+	 * @param pos		the position of the cell that is being branched from
+	 * @param nextVal	the value that is being looked for
+	 * @param gridSize	the size of hte grid
+	 * @param grid		the grid
+	 * @return			the position of the next value (null if it does not exist)
+	 */
 	private final int[] findNext(int[] pos, int nextVal, int gridSize, Integer[][] grid)
 	{
 		int[] returner = {-1,-1};
@@ -156,6 +188,15 @@ public class Validator
 		return returner;
 	} /* end findNext method */
 	
+	/**
+	 * Check to see if the coordinates are correct and if the provided val is at the coordinate
+	 * @param x			the x coordinate being checked
+	 * @param y			the y coordinate being checked
+	 * @param val		the value being looked for
+	 * @param gridSize	the size of the grid
+	 * @param grid		the grid
+	 * @return			whether or not the x and y coordinates are valid and contain val
+	 */
 	private final boolean checkVal(int x, int y, int val, int gridSize, Integer[][] grid)
 	{// Check to see if the coordinates are correct and if the provided val is at the coordinate
 		boolean found = false;

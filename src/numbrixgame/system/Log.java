@@ -1,8 +1,8 @@
 package numbrixgame.system;
 
-/*****************************************************************************************************
+/**
  * Log is a data structure that will be used by history to keep track of changes to the grid.
- ******************************************************************************************************/
+ */
 
 public class Log 
 {
@@ -29,21 +29,37 @@ public class Log
 	} /* end constructor */
 	
 	/*------------------ Getter methods ------------------*/
+	/**
+	 * Returns x
+	 * @return	x
+	 */
 	public int getX()
 	{
 		return this.X;
 	} /* end getX method */
 	
+	/**
+	 * Returns y
+	 * @return	y
+	 */
 	public int getY()
 	{
 		return this.Y;
 	} /* end getY method */
 	
+	/**
+	 * Returns val
+	 * @return	val
+	 */
 	public Integer getVal()
 	{
 		return this.val;
 	} /* end getVal method */
 	
+	/**
+	 * Returns change
+	 * @return	change
+	 */
 	public History.Modification getChange()
 	{
 		return this.change;

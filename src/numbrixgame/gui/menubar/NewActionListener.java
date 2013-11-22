@@ -16,10 +16,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import numbrixgame.numbrix;
 import numbrixgame.system.NumbrixSystem;
 
-/*****************************************************************************************************
+/**
  * The ActionListener that will be used by the New Menu Item. The action should open up a JFileChooser
  * and interact with the system accordingly
- *****************************************************************************************************/
+ */
 
 public class NewActionListener implements ActionListener
 {

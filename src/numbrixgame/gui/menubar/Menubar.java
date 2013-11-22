@@ -2,9 +2,9 @@ package numbrixgame.gui.menubar;
 
 import javax.swing.JMenuBar;
 
-/*****************************************************************************************************
+/**
  * Toolbar will create the toolbar to be used by Numbrix
- *****************************************************************************************************/
+ */
 
 public class Menubar extends JMenuBar
 {	

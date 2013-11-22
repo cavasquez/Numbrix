@@ -9,9 +9,9 @@ import numbrixgame.gui.menubar.Menubar;
 import numbrixgame.system.NumbrixSystem;
 
 
-/*****************************************************************************************************
+/**
  * GUI will be the gui that acts as the "view" for Numbrix
- *****************************************************************************************************/
+ */
 
 public class GUI extends JFrame
 {
@@ -35,6 +35,10 @@ public class GUI extends JFrame
 	} /* end constructor */
 	
 	/*------------------ Public methods ------------------*/
+	/**
+	 * Sets the message as the text for bottom
+	 * @param message	the message being set
+	 */
 	public void printMessage(String message)
 	{ /* print the message via bottom */
 		bottom.setText(message);
@@ -43,6 +47,12 @@ public class GUI extends JFrame
 		this.revalidate();
 	} /* end printMessage method */
 	
+	/**
+	 * Overrides the current table with the startData and staticData
+	 * @param tableSize		the size of the table
+	 * @param staticData	the non-modifiable cells
+	 * @param startData		the data to populate
+	 */
 	public void addTable(int tableSize, boolean[][] staticData, Integer[][] startData)
 	{
 		this.removeTable();
@@ -55,6 +65,9 @@ public class GUI extends JFrame
 		this.revalidate();
 	} /* end setMainDisplay */
 	
+	/**
+	 * Removes the table from GUI
+	 */
 	public void removeTable()
 	{
 		if(this.table != null) this.remove(this.table);
@@ -64,11 +77,18 @@ public class GUI extends JFrame
 		this.revalidate();
 	} /* end removeMainDisplay method */
 	
+	/**
+	 * Renders the table
+	 */
 	public void revalidateTable()
 	{
 		this.addTable(numbrix.system().getGridSize(), numbrix.system().getStaticData(), numbrix.system().getGrid());
 	} /* end revalidateTable */
 	
+	/**
+	 * Creates the LeftDisplay to be used given the playerType
+	 * @param playerType	the type of player (COMPUTER or HUMAN)
+	 */
 	public void addLeftDisplay(NumbrixSystem.Player playerType)
 	{
 		this.removeLeftDisplay();
@@ -83,6 +103,9 @@ public class GUI extends JFrame
 		this.revalidate();
 	} /* end addLeftDisplay method */
 	
+	/**
+	 * Removes the contents in left and then removes left
+	 */
 	public void removeLeftDisplay()
 	{
 		if(this.left != null)this.left.removeAll();
@@ -92,6 +115,10 @@ public class GUI extends JFrame
 		this.revalidate();
 	} /* end remoevLeftDisplay */
 	
+	/**
+	 * Change history to show the provided text
+	 * @param newHistory	the text to be shown in history
+	 */
 	public void changeHistory(String newHistory)
 	{
 		this.history.setText(newHistory);
@@ -99,6 +126,9 @@ public class GUI extends JFrame
 	} /* end changeHistory method */
 	
 	/*------------------ Private methods ------------------*/
+	/**
+	 * Creates the basic UI
+	 */
 	private final void initializeUI()
 	{// Create the UI
 		// Set the menubar
@@ -121,6 +151,10 @@ public class GUI extends JFrame
 	} /* end initializeUI method */
 	
 	/*------------------ Getter methods ------------------*/
+	/**
+	 * Returns table
+	 * @return	table
+	 */
 	public Table getTable()
 	{
 		return this.table;

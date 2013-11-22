@@ -27,7 +27,7 @@ public class CompleteActionListener extends ComputerActionListener
 		
 		// Update GUI
 		numbrix.system().complete(ComputerActionListener.grid, ComputerActionListener.historyLog);
-		numbrix.gui().printMessage(ComputerActionListener.time);
+		numbrix.gui().printMessage(ComputerActionListener.time + " This may take some time to load.");
 		numbrix.gui().changeHistory(numbrix.system().getHistory());
 		
 	} /* end actionPerformed method */
