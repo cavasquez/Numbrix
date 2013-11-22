@@ -5,10 +5,9 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TreeSet;
 
-import numbrixgame.numbrix;
-
 /**
- * The constraint search to be used by the Solver.
+ * The constraint search to be used by the Solver. It will utilize constraints to help find
+ * possible cell values in the Numbrix grid.
  * @author Carlos Vasquez
  *
  */

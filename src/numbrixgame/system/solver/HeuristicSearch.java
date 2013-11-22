@@ -4,15 +4,14 @@ import java.util.LinkedList;
 import numbrixgame.numbrix;
 
 /**
- * The heuristic search to be used by the solver.
+ * The heuristic search to be used by the solver. It will attempt a brute force search of the grid
+ * to solved the Numbrix grid.
  * @author Carlos Vasquez
  *
  */
 
 public class HeuristicSearch extends SearchMethod
 {
-	/************************************ Class Attributes *************************************/
-	
 	/************************************ Class Methods *************************************/
 	public HeuristicSearch(Solver solver)
 	{
@@ -90,6 +89,16 @@ public class HeuristicSearch extends SearchMethod
 		return solved;
 	} /* end startSearch method */
 	
+	/**
+	 * A recursive search (of sorts) which checks to see if the triple can be placed and make sure
+	 * that the nodeCount has not reached 1. If it is possible to place the triple in the cell in the
+	 * direction, search will then search to the increment of the triple in the remaining direcetions.
+	 * @param triple	the cell calling the search
+	 * @param direction	the direction that triple is searching to populate
+	 * @param nodeCount	the number of nodes left to search for
+	 * @param increment	the "direction" the search is going in (forward or backward)
+	 * @return			the status of the solution
+	 */
 	public boolean search(Triple triple, Direction direction, int nodeCount, int increment)
 	{
 		boolean solved = false;

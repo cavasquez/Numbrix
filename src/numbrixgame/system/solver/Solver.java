@@ -12,8 +12,6 @@ import numbrixgame.system.Validator;
 
 public class Solver 
 {
-	/************************************ Class Constants *************************************/
-	
 	/************************************ Class Attributes *************************************/
 	private static NumbrixSystem system;
 	private static  Snake snake;
@@ -202,16 +200,28 @@ public class Solver
 		this.constraint.undo();
 	} /* end undo method */
 	
+	/**
+	 * Returns a String representation of snake
+	 * @return	a String representation of snake
+	 */
 	public String snakeString()
 	{
 		return Solver.snake.toString();
 	} /* end snakeString method */
 	
+	/**
+	 * Returns constraint
+	 * @return	constraint
+	 */
 	protected ConstraintSearch getConstraint()
 	{
 		return this.constraint;
 	} /* end getConstraintSearch method */
 	
+	/**
+	 * Returns heuristic
+	 * @return	heuristic
+	 */
 	protected HeuristicSearch getHeuristic()
 	{
 		return Solver.heuristic;
@@ -231,6 +241,10 @@ public class Solver
 		return returner;
 	} /* end getTimeElapsed method */
 	
+	/**
+	 * Returns solutionFound
+	 * @return	solutionFound
+	 */
 	public boolean getSolutionFound()
 	{
 		return this.solutionFound;

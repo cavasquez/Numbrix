@@ -316,6 +316,11 @@ public class Snake
 		return returner;
 	} /* end count method */
 	
+	/**
+	 * Returns whether or not the provided value is a tip
+	 * @param value	the value being searched for
+	 * @return		whether or not the provided value is a tip
+	 */
 	public boolean isEnd(int value)
 	{
 		boolean isEnd = false;
@@ -394,6 +399,10 @@ public class Snake
 		return this.snake.get(list).getLast();
 	} /* end getLast method */
 	
+	/**
+	 * Returns whether or Snake has any empty LinkedLists
+	 * @return	whether or Snake has any empty LinkedLists
+	 */
 	public boolean hasEmpty()
 	{
 		boolean empty = false;
@@ -404,6 +413,9 @@ public class Snake
 		return empty;
 	} /* end hasEmpty method */
 	
+	/**
+	 * Returns a String representation of Snake
+	 */
 	@Override
 	public String toString()
 	{
