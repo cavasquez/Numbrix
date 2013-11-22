@@ -5,10 +5,10 @@ import javax.swing.JToolBar;
 import numbrixgame.numbrix;
 import numbrixgame.system.NumbrixSystem;
 
-/*****************************************************************************************************
+/**
  * LeftDisplay will create a toolbar on the left dislpay providing the player options. The options
  * provided will depend on the type of user (player or computer).
- *****************************************************************************************************/
+ */
 
 public class LeftDisplay extends JToolBar
 {
@@ -16,6 +16,10 @@ public class LeftDisplay extends JToolBar
 	private static final long serialVersionUID = 7289612130330416712L;
 	
 	/*************************** Class Methods ***************************/
+	/**
+	 * Creates the appropriate JButton(s) based on the playerType
+	 * @param playerType	type of player (COMPUTER or HUMAN)
+	 */
 	public void initialize(NumbrixSystem.Player playerType)
 	{
 		// Initialize the correct type
@@ -33,6 +37,9 @@ public class LeftDisplay extends JToolBar
 	} /* end initialize method */
 	
 	/*------------------ Private methods ------------------*/
+	/**
+	 * Creates a Finish button that will check the board for completeness and correctness
+	 */
 	private final void initializeHuman()
 	{// Give the human a "finish" button to verify if the completed game is correct
 		JButton finish = new JButton("Finish");
@@ -41,6 +48,11 @@ public class LeftDisplay extends JToolBar
 		this.add(finish);
 	} /* end initializeHuman method */
 	
+	/**
+	 * Creates a "NextMove" and a "Complete" button that will display the next
+	 * move made by the solver or display the completed board and every move made
+	 * by the solver (respectively)
+	 */
 	private final void initializeComputer()
 	{// Give the user an option to complete the table and see the entire board or step through
 		// Next must be created first so it can init ComputerAcitonListener

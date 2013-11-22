@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 import numbrixgame.numbrix;
 import numbrixgame.system.Validator;
 
-/*****************************************************************************************************
+/***
  * FinishActionListener will define the action listener to be used by the finish button.
  * It should request from system a message that states the state of the grid and then return it
  * to the player via the bottom text box.
- *****************************************************************************************************/
+ */
 
 public class FinishActionListener implements ActionListener
 {
