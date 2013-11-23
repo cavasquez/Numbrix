@@ -1,8 +1,10 @@
 This report will detail the entire project. As a minimum this report should include:
-1. A description of the game which was implemented.
-2. A description of the implementation approach which was taken.
-3. A description of all programs/procedures/methods written and all major variables used.
-4. A flowchart of the program.
-5. A calling hierarchy and/or UML diagram showing the various methods/functions and how the various they call each other.
+-. A description of the game which was implemented.
+-. A description of the implementation approach which was taken.
+3x. A description of all programs/procedures/methods written and all major variables used.
+4x. A flowchart of the program.
+5x. A calling hierarchy and/or UML diagram showing the various methods/functions and how the various they call each other.
 6. A description of what intelligence was implemented and what was not. Discuss why the non-implemented intelligence was not implemented.
 7. A discussion of what you would do differently if you were able to start over.
+
+Please contact Orange Bowl Account Executive, Joe Mandele directly at (305) 341-4776 or jmandele@orangebowl.org with any questions.

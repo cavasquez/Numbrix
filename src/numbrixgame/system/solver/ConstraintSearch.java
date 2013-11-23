@@ -59,8 +59,7 @@ public class ConstraintSearch extends SearchMethod
 	/**
 	 * Recursive function that searches for the next constraint
 	 * @param increment	forward or backwards
-	 * @param previous	the previous node (the callee)
-	 * @param direction	the direction of the search
+	 * @param current	the current node (node being looked at)
 	 * @return			the success of the search
 	 */
 	protected boolean search(int increment, Triple current)
@@ -367,7 +366,6 @@ public class ConstraintSearch extends SearchMethod
 	 * Function called when constraint is found. Modifies data accordingly
 	 * @param direction		the direction of the node found
 	 * @param current		the current triple
-	 * @param firstDegree	which search found the constraint
 	 * @param increment		the direction being traveled
 	 */
 	private void constraintFound(Direction direction, Triple current, int increment)
