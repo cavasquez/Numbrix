@@ -181,23 +181,26 @@ public class NumbrixSystem
 	/**
 	 * Applies the completed grid and history 
 	 */
-	public void complete(Integer[][] grid, ArrayList<Log> log)
+	public void complete(Integer[][] grid, ArrayList<Log> log, boolean history)
 	{
 		this.resetData();
 		this.grid = grid;
 		numbrix.gui().addTable(this.gridSize, this.staticData, this.grid);
 		
-		boolean[][] completed = new boolean[this.gridSize][];
-		for(int i = 0; i < this.gridSize; i++)
+		if(history)
 		{
-			completed[i] = new boolean[this.gridSize];
-			for(int j = 0; j < this.gridSize; j++)
+			boolean[][] completed = new boolean[this.gridSize][];
+			for(int i = 0; i < this.gridSize; i++)
 			{
-				completed[i][j] = true;
+				completed[i] = new boolean[this.gridSize];
+				for(int j = 0; j < this.gridSize; j++)
+				{
+					completed[i][j] = true;
+				} /* end for loop */
 			} /* end for loop */
-		} /* end for loop */
-		
-		this.history = new History(gridSize, staticData, log, completed);
+			
+			this.history = new History(gridSize, staticData, log, completed);
+		} /* end if */
 		
 	} /* end complete method */
 	

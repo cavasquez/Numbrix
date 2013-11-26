@@ -26,7 +26,7 @@ public class CompleteActionListener extends ComputerActionListener
 		if(ComputerActionListener.next != 0) numbrix.system().resetData();
 		
 		// Update GUI
-		numbrix.system().complete(ComputerActionListener.grid, ComputerActionListener.historyLog);
+		numbrix.system().complete(ComputerActionListener.grid, ComputerActionListener.historyLog, true);
 		numbrix.gui().printMessage(ComputerActionListener.time + " This may take some time to load.");
 		numbrix.gui().changeHistory(numbrix.system().getHistory());
 		
