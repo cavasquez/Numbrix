@@ -234,9 +234,10 @@ public class Solver
 	public String getTimeElsapsed()
 	{
 		String returner = null;
-		long milliseconds = TimeUnit.MILLISECONDS.convert(this.endTime - this.startTime, TimeUnit.NANOSECONDS);
-		long seconds = TimeUnit.SECONDS.convert(this.endTime - this.startTime - milliseconds, TimeUnit.NANOSECONDS);
-		long minutes = TimeUnit.MINUTES.convert(this.endTime - this.startTime - seconds, TimeUnit.NANOSECONDS);
+		long minutes = TimeUnit.MINUTES.convert(this.endTime - this.startTime, TimeUnit.NANOSECONDS);
+		long seconds = TimeUnit.SECONDS.convert(this.endTime - this.startTime - (minutes*60), TimeUnit.NANOSECONDS);
+		long milliseconds = TimeUnit.MILLISECONDS.convert(this.endTime - this.startTime - (minutes*60*1000) - (seconds*1000), TimeUnit.NANOSECONDS);
+		
 		returner = minutes + ":" + seconds + ":" + milliseconds;
 		return returner;
 	} /* end getTimeElapsed method */
