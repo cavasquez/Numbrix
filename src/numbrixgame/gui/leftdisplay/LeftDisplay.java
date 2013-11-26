@@ -66,6 +66,11 @@ public class LeftDisplay extends JToolBar
 		complete.addActionListener(new CompleteActionListener(numbrix.system().getSolver()));
 		this.add(complete);
 		
+		JButton completeGrid = new JButton("Complete Grid");
+		completeGrid.setToolTipText("Click to see the completed board without the history of the steps to achieve completion. This will save time.");
+		completeGrid.addActionListener(new CompleteGrid(numbrix.system().getSolver()));
+		this.add(completeGrid);
+		
 	} /* end initializeComputer method */
 
 } /* end LeftDisplay class */

@@ -21,8 +21,8 @@ public class HeuristicSearch extends SearchMethod
 	/**
 	 * Stars the heuristic search by initializing variables and finding the
 	 * shortest unsolved path in the snake.
-	 * @param solver
-	 * @return
+	 * @param solver	The solver doing the solving
+	 * @return			whether or not a path was found
 	 */
 	public boolean startSearch(Solver solver)
 	{

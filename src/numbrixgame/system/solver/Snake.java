@@ -303,7 +303,7 @@ public class Snake
 	
 	/**
 	 * Returns the number of Triples in the snake
-	 * @return
+	 * @return	the number of Triples in the snake
 	 */
 	public int count()
 	{
