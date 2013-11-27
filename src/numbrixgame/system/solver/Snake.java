@@ -349,7 +349,8 @@ public class Snake
 		
 		boolean isEnd = false;
 		int list = 0;
-		while(!isEnd && (value >= snake.get(list).getFirst().getValue()) && (list < snake.size()) )
+
+		while(!isEnd && (list < snake.size()) && (value >= snake.get(list).getFirst().getValue()) )
 		{
 			if(snake.get(list).getFirst().getValue() == value || 
 					snake.get(list).getLast().getValue() == value) 
