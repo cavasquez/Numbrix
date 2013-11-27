@@ -235,8 +235,8 @@ public class Solver
 	{
 		String returner = null;
 		long minutes = TimeUnit.MINUTES.convert(this.endTime - this.startTime, TimeUnit.NANOSECONDS);
-		long seconds = TimeUnit.SECONDS.convert(this.endTime - this.startTime - (minutes*60), TimeUnit.NANOSECONDS);
-		long milliseconds = TimeUnit.MILLISECONDS.convert(this.endTime - this.startTime - (minutes*60*1000) - (seconds*1000), TimeUnit.NANOSECONDS);
+		long seconds = TimeUnit.SECONDS.convert((this.endTime - this.startTime) % (60000), TimeUnit.NANOSECONDS);
+		long milliseconds = TimeUnit.MILLISECONDS.convert((this.endTime - this.startTime) % 1000, TimeUnit.NANOSECONDS);
 		
 		returner = minutes + ":" + seconds + ":" + milliseconds;
 		return returner;
