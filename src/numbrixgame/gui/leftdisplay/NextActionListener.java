@@ -35,7 +35,6 @@ public class NextActionListener extends ComputerActionListener
 		if(next < this.totalMoves)
 		{
 			Log log = ComputerActionListener.historyLog.get(next);
-//			System.out.println(log);
 			numbrix.system().modifyGrid(log.getX(), log.getY(), log.getVal());
 			numbrix.gui().revalidateTable();
 			String message = ComputerActionListener.time + " Currently at move " + (next + 1) + " of " + this.totalMoves;

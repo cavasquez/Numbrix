@@ -16,6 +16,11 @@ public class LeftDisplay extends JToolBar
 	private static final long serialVersionUID = 7289612130330416712L;
 	
 	/*************************** Class Methods ***************************/
+	public LeftDisplay()
+	{
+		super(JToolBar.VERTICAL);
+	} /* end constructor */
+	
 	/**
 	 * Creates the appropriate JButton(s) based on the playerType
 	 * @param playerType	type of player (COMPUTER or HUMAN)
