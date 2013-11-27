@@ -10,10 +10,10 @@ x_2 y_2	value_2
 .
 x_i y_i value_i 
 
-where i is an arbitrary number no greater than # of rows * # of columns. I understand that the formatting
-had the "origin" of the gridstart at the bottom left corner, but since we are allowed to format the text 
-file as wanted, the "origin" is the top left corner.
+where i is an arbitrary number no greater than # of rows * # of columns. The formatting is set so that the
+"origin" of the grid starts at the bottom left corner.
 
+If the "Human" option is chosen, then the instructions are as follows:
 After filling in the grid, click on the "Finish" button. Doing so will produce a message in the bottom pane
 informing the player on correctness of grid or errors encountered. Once done, the bottom pane will inform
 the player the process needed to start a new game (file -> new game or file -> reset).
@@ -24,6 +24,21 @@ To input a value, simply click on the cell you wish to modify and type in the nu
 to place into the cell. To delete a value, simply click on the cell you wish to remove a value from
 and hit backspace until there is no value left.
 
-Two sample girds are provided in example1.txt and example2.txt
-example1.txt contains the grid from the project specification
-example2.txt contains the sample grid from the discussion
+If the "Computer" option is chosen, then the instructions are as follows:
+The program will communicate if it found a solution and the time it took to solve/attempt the grid in the
+bottom box. 
+
+To the left are three choices explained as follows:
+Next: This will step the user through the programs solution path and populate the History box to the right
+as each step is taken. The program will also communicate the step count out of the total steps at the bottom
+along with the time taken to solve/attempt the solution.
+
+Complete: This will simply populate the grid with the solution and populate the History box with every move taken
+by the program. However, this can be a very time consuming process.
+
+Complete grid: This will simply populate the grid with the solution without populateing the History box in order
+to save time if the user only cares about the solution. This process takes an insignificant amount of time to do
+vs doing the above choice.
+
+The tournament boards can be found in boards/tournament and are named ti.txt where i is the board number.
+Sample boards can be found in boards/examples.
